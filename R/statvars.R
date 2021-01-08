@@ -106,7 +106,7 @@ count_female_population <- function(geo_names, level=c(default="zip", "state"),
   for (year in as.character(start_year:end_year)) {
     # initialize main data frame
     df1 <- data.frame(geoName=names(geo_map))
-    for (year_bracket in names(statvar_map)) {
+    for (age_bracket in names(statvar_map)) {
       # initialize data frame to store each statistical variable per zip code
       df2 <- data.frame(geoName=names(geo_map))
       statvar_values <- c()
@@ -114,13 +114,13 @@ count_female_population <- function(geo_names, level=c(default="zip", "state"),
         geo_dcid <- geo_map[[geoid]]
         place_data <- .get_place_data(http_response, geo_dcid)
         
-        statvar_dcid <- statvar_map[[year_bracket]]
+        statvar_dcid <- statvar_map[[age_bracket]]
         statvar_data <- .get_statvar_data(place_data, statvar_dcid)
         
         value <- .get_statvar_value_from_year(statvar_data, year)
         statvar_values <- c(statvar_values, value)
       }
-      df2[, year_bracket] <- factor(statvar_values)
+      df2[, age_bracket] <- factor(statvar_values)
       df1 <- merge(x=df1, y=df2, by="geoName", all.x=TRUE)
     }
     provenance_df <- .get_provenance_info(http_response, geo_map, statvar_map)
@@ -146,8 +146,8 @@ count_female_population <- function(geo_names, level=c(default="zip", "state"),
     measurement_method <- NA
     provenance_domain <- NA
     provenance_url <- NA
-    for (year_bracket in names(statvar_map)) {
-      statvar_dcid <- statvar_map[[year_bracket]]
+    for (age_bracket in names(statvar_map)) {
+      statvar_dcid <- statvar_map[[age_bracket]]
       statvar_data <- .get_statvar_data(place_data, statvar_dcid)
       
       measurement_method <- .coalesce(measurement_method, 
