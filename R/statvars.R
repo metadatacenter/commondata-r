@@ -1,7 +1,7 @@
 #' Return the male population by 5-year age brackets, given the ZIP codes and
 #' the observation year period.
 #' 
-#' @param zips required, vector of string(s) of US ZIP codes
+#' @param geonames required, vector of string(s) of geographical names
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
@@ -17,7 +17,7 @@
 #' @examples
 #' zips <- c("94035","94039","94040","94041","94042","94043")
 #' 
-#' # Count the male population in a specific area
+#' # Count the male population in a specific ZIP codes
 #' count_male_population(zips)
 #' 
 #' # Count the male population from 2012 to 2015
@@ -25,21 +25,27 @@
 #' 
 #' # Count the male population in 2012
 #' count_male_population(zips, year=2012)
-count_male_population <- function(zips, start_year=2011, end_year=2018, year=NA) {
+#' 
+#' # Count the male population in California state
+#' count_male_population(c("California"), level="state") # State name
+#' count_male_population(c("CA"), level="state") # State code
+#' count_male_population(c("06"), level="state") # 2-digit state FIPS code
+count_male_population <- function(geonames, level=c(default="zip", "state"), 
+                                  start_year=2011, end_year=2018, year=NA) {
 
-  zip_map <- .create_zip_dcid_map(zips)
-  
+  geo_map <- .create_geo_dcid_map(geonames, match_arg(level))
+
   statvar_map <- sapply(CENSUS_5_YEARS_BRACKETS, 
                         function(x) paste0("Count_Person_", x, "_Male"), 
                         simplify = FALSE, USE.NAMES = TRUE)
   
-  return (.count_population_by_gender(zip_map, statvar_map, start_year, end_year, year))
+  return (.count_population_by_gender(geo_map, statvar_map, start_year, end_year, year))
 }
 
 #' Return the female population by 5-year age brackets, given the ZIP codes and
 #' the observation year period.
 #' 
-#' @param zips required, vector of string(s) of US ZIP codes
+#' @param geonames required, vector of string(s) of geographical names
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
@@ -55,7 +61,7 @@ count_male_population <- function(zips, start_year=2011, end_year=2018, year=NA)
 #' @examples
 #' zips <- c("94035","94039","94040","94041","94042","94043")
 #' 
-#' # Count the male population in a specific area
+#' # Count the male population in a specific ZIP codes
 #' count_male_population(zips)
 #' 
 #' # Count the male population from 2012 to 2015
@@ -63,27 +69,35 @@ count_male_population <- function(zips, start_year=2011, end_year=2018, year=NA)
 #' 
 #' # Count the male population in 2012
 #' count_male_population(zips, year=2012)
-count_female_population <- function(zips, start_year=2011, end_year=2018, year=NA) {
+#' 
+#' # Count the female population in California state
+#' count_female_population(c("California"), level="state") # State name
+#' count_female_population(c("CA"), level="state") # State code
+#' count_female_population(c("06"), level="state") # 2-digit state FIPS code
+count_female_population <- function(geonames, level=c(default="zip", "state"), 
+                                    start_year=2011, end_year=2018, year=NA) {
   
-  zip_map <- .create_zip_dcid_map(zips)
+  geo_map <- .create_geo_dcid_map(geonames, match_arg(level))
   
   statvar_map <- sapply(CENSUS_5_YEARS_BRACKETS, 
                         function(x) paste0("Count_Person_", x, "_Female"), 
                         simplify = FALSE, USE.NAMES = TRUE)
   
-  return (.count_person_by_gender(zip_map, statvar_map, start_year, end_year, year))
+  return (.count_population_by_gender(geo_map, statvar_map, start_year, end_year, year))
 }
+
+
 
 # Helpers ----------------------------------------------------------------------------------
 
-.count_population_by_gender <- function(zip_map, statvar_map, start_year, end_year, year) {
+.count_population_by_gender <- function(geo_map, statvar_map, start_year, end_year, year) {
   
   start_year <- if (!is.na(year)) year else start_year
   end_year <- if (!is.na(year)) year else end_year
   
   body <- jsonlite::toJSON(list(
     stat_vars = as.vector(unlist(statvar_map)), 
-    places = as.vector(unlist(zip_map))), 
+    places = as.vector(unlist(geo_map))), 
     auto_unbox = TRUE)
   
   http_response <- .http_post(DCAPI_STAT_ALL, body);
@@ -91,14 +105,14 @@ count_female_population <- function(zips, start_year=2011, end_year=2018, year=N
   output <- list()
   for (year in as.character(start_year:end_year)) {
     # initialize main data frame
-    df1 <- data.frame(zip=names(zip_map))
+    df1 <- data.frame(geoid=names(geo_map))
     for (year_bracket in names(statvar_map)) {
       # initialize data frame to store each statistical variable per zip code
-      df2 <- data.frame(zip=names(zip_map))
+      df2 <- data.frame(geoid=names(geo_map))
       statvar_values <- c()
-      for (zip in names(zip_map)) {
-        zip_dcid <- zip_map[[zip]]
-        place_data <- .get_place_data(http_response, zip_dcid)
+      for (geoid in names(geo_map)) {
+        geo_dcid <- geo_map[[geoid]]
+        place_data <- .get_place_data(http_response, geo_dcid)
         
         statvar_dcid <- statvar_map[[year_bracket]]
         statvar_data <- .get_statvar_data(place_data, statvar_dcid)
@@ -107,28 +121,28 @@ count_female_population <- function(zips, start_year=2011, end_year=2018, year=N
         statvar_values <- c(statvar_values, value)
       }
       df2[, year_bracket] <- factor(statvar_values)
-      df1 <- merge(x=df1, y=df2, by="zip", all.x=TRUE)
+      df1 <- merge(x=df1, y=df2, by="geoid", all.x=TRUE)
     }
-    provenance_df <- .get_provenance_info(http_response, zip_map, statvar_map)
+    provenance_df <- .get_provenance_info(http_response, geo_map, statvar_map)
     
-    df1 <- merge(x=df1, y=provenance_df, by="zip", all.x=TRUE)
-    rownames(df1) <- df1$zip
+    df1 <- merge(x=df1, y=provenance_df, by="geoid", all.x=TRUE)
+    rownames(df1) <- df1$geoid
     output[[year]] <- df1
   }
   return (output)
 }
 
-.get_provenance_info <- function(obj, zip_map, statvar_map) {
+.get_provenance_info <- function(obj, geo_map, statvar_map) {
   
-  output <- data.frame(zip=names(zip_map), measurementMethod=NA,
+  output <- data.frame(geoid=names(geo_map), measurementMethod=NA,
                        provenanceDomain=NA, provenanceUrl=NA)
   
   measurement_methods <- c()
   provenance_domains <- c()
   provenance_urls <- c()
-  for (zip in names(zip_map)) {
-    zip_dcid <- zip_map[[zip]]
-    place_data <- .get_place_data(obj, zip_dcid)
+  for (geoid in names(geo_map)) {
+    geo_dcid <- geo_map[[geoid]]
+    place_data <- .get_place_data(obj, geo_dcid)
     measurement_method <- NA
     provenance_domain <- NA
     provenance_url <- NA
@@ -171,6 +185,21 @@ count_female_population <- function(zips, start_year=2011, end_year=2018, year=N
                     function(x) paste0("zip/", x), 
                     simplify = FALSE, USE.NAMES = TRUE)
   return (zip_map)
+}
+
+.create_state_dcid_map <- function(states) {
+  state_map <- sapply(states,
+                      function(x) {
+                        fips <- usmap::fips(x)
+                        paste0("geoId/", if(is.na(fips)) x else fips)},
+                      simplify = FALSE, USE.NAMES = TRUE)
+  return (state_map)
+}
+
+.create_geo_dcid_map <- function(geonames, level) {
+  switch(level,
+         zip = .create_zip_dcid_map(geonames),
+         state = .create_state_dcid_map(geonames))
 }
 
 .get_place_data <- function(obj, zip_dcid) {

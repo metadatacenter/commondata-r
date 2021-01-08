@@ -19,6 +19,7 @@ Imports:
     tidyverse,
     httr,
     jsonlite,
-    tibble
+    tibble,
+    usmap
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
