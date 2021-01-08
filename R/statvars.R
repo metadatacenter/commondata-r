@@ -2,6 +2,8 @@
 #' the observation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
+#' @param level optional, string indicating the geographical level. Should be
+#'    one of {"zip", "state"}. "zip" by default.
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
@@ -46,6 +48,8 @@ count_male_population <- function(geo_names, level=c(default="zip", "state"),
 #' the observation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
+#' @param level optional, string indicating the geographical level. Should be
+#'    one of {"zip", "state"}. "zip" by default.
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
