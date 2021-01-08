@@ -1,0 +1,24 @@
+Type: Package
+Package: commondata
+Title: A Collection of Common Data 
+Version: 1.0.0
+Authors@R: 
+    person(given = "Josef",
+           family = "Hardi",
+           role = c("aut", "cre"),
+           email = "johardi@stanford.edu",
+           comment = c(ORCID = "0000-0002-2533-6681"))
+Description: A library tool for retrieving common data stored in the
+    DataCommons open knowledge repository (https://datacommons.org/)
+License: Apache License, Version 2.0
+Encoding: UTF-8
+LazyData: true
+Imports:
+	data.table (>= 1.9.4),
+	dplyr,
+    tidyverse,
+    httr,
+    jsonlite,
+    tibble
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
