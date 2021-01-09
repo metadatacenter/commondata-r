@@ -114,8 +114,8 @@ count_female_population <- function(geo_names, level=c(default="zip", "state"),
       # initialize data frame to store each statistical variable per zip code
       df2 <- data.frame(geoName=names(geo_map))
       statvar_values <- c()
-      for (geoid in names(geo_map)) {
-        geo_dcid <- geo_map[[geoid]]
+      for (geo_name in names(geo_map)) {
+        geo_dcid <- geo_map[[geo_name]]
         place_data <- .get_place_data(http_response, geo_dcid)
         
         statvar_dcid <- statvar_map[[age_bracket]]
@@ -144,8 +144,8 @@ count_female_population <- function(geo_names, level=c(default="zip", "state"),
   measurement_methods <- c()
   provenance_domains <- c()
   provenance_urls <- c()
-  for (geoid in names(geo_map)) {
-    geo_dcid <- geo_map[[geoid]]
+  for (geo_name in names(geo_map)) {
+    geo_dcid <- geo_map[[geo_name]]
     place_data <- .get_place_data(obj, geo_dcid)
     measurement_method <- NA
     provenance_domain <- NA
