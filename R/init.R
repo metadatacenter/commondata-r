@@ -39,6 +39,24 @@
     "Above100Years"
   )
   
+  CENSUS_INCOME_BRACKETS <<- c(
+    "10000To14999USDollar",
+    "15000To19999USDollar",
+    "20000To24999USDollar",
+    "25000To29999USDollar",
+    "30000To34999USDollar",
+    "35000To39999USDollar",
+    "40000To44999USDollar",
+    "45000To49999USDollar",
+    "50000To59999USDollar",
+    "60000To74999USDollar",
+    "75000To99999USDollar",
+    "100000To124999USDollar",
+    "125000To149999USDollar",
+    "150000To199999USDollar",
+    "200000OrMoreUSDollar"
+  )
+  
   # ZIP codes
   # City level
   ALVISO_CITY_CA <<- c("95002")
