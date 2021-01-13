@@ -45,6 +45,18 @@
     "65OrMoreYears"
   )
   
+  CENSUS_RACE_CATEGORIES <<- c(
+    "WhiteAlone",
+    "BlackOrAfricanAmericanAlone",
+    "AmericanIndianOrAlaskaNativeAlone",
+    "AsianAlone",
+    "NativeHawaiianOrOtherPacificIslanderAlone",
+    "SomeOtherRaceAlone",
+    "TwoOrMoreRaces",
+    "WhiteAloneNotHispanicOrLatino",
+    "HispanicOrLatino"
+  )
+  
   CENSUS_INCOME_BRACKETS <<- c(
     "10000To14999USDollar",
     "15000To19999USDollar",

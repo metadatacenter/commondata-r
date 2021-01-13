@@ -11,6 +11,30 @@ count_household_income_by_age <- function(geo_names, level=c(default="zip", "sta
              simplify = FALSE, USE.NAMES = TRUE)
   }
   
+  return (.count_household_income_by_denominator(geo_map, statvar_with_denominator_map,
+                                                 start_year, end_year, year))
+}
+
+count_household_income_by_race <- function(geo_names, level=c(default="zip", "state"), 
+                                           start_year=2011, end_year=2018, year=NA) {
+  
+  geo_map <- .create_geo_dcid_map(geo_names, match_arg(level))
+  
+  statvar_with_denominator_map <- list()
+  for (race_category in CENSUS_RACE_CATEGORIES) {
+    statvar_with_denominator_map[[race_category]] <- 
+      sapply(CENSUS_INCOME_BRACKETS,
+             function(x) paste0("Count_Household_HouseholderRace", race_category, "_IncomeOf", x),
+             simplify = FALSE, USE.NAMES = TRUE)
+  }
+  
+  return (.count_household_income_by_denominator(geo_map, statvar_with_denominator_map,
+                                                 start_year, end_year, year))
+}
+
+.count_household_income_by_denominator <- function(geo_map, statvar_with_denominator_map,
+                                                   start_year, end_year, year) {
+  
   start_year <- if (!is.na(year)) year else start_year
   end_year <- if (!is.na(year)) year else end_year
   
