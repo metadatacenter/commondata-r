@@ -15,7 +15,7 @@
   PROVENANCE_URL <<- "provenanceUrl"
   
   # Statistical variables group
-  CENSUS_5_YEARS_BRACKETS <<- c(
+  CENSUS_MOD1_AGE_BRACKETS <<- c(
     "Under5Years",
     "5To9Years",
     "10To14Years",
@@ -52,7 +52,8 @@
     "Above85Years"
   )
   
-  CENSUS_HOUSEHOLDER_AGE_BRACKETS <<- c(
+  CENSUS_MOD3_AGE_BRACKETS <<- c(
+    "Under25Years",
     "25To44Years",
     "45To64Years",
     "65OrMoreYears"

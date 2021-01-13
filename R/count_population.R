@@ -83,7 +83,7 @@ count_male_population <- function(geo_names, level=c(default="zip", "state"),
 
   geo_map <- .create_geo_dcid_map(geo_names, match_arg(level))
 
-  statvar_map <- sapply(CENSUS_5_YEARS_BRACKETS, 
+  statvar_map <- sapply(CENSUS_MOD1_AGE_BRACKETS, 
                         function(x) paste0("Count_Person_", x, "_Male"), 
                         simplify = FALSE, USE.NAMES = TRUE)
   
@@ -129,7 +129,7 @@ count_female_population <- function(geo_names, level=c(default="zip", "state"),
   
   geo_map <- .create_geo_dcid_map(geo_names, match_arg(level))
   
-  statvar_map <- sapply(CENSUS_5_YEARS_BRACKETS, 
+  statvar_map <- sapply(CENSUS_MOD1_AGE_BRACKETS, 
                         function(x) paste0("Count_Person_", x, "_Female"), 
                         simplify = FALSE, USE.NAMES = TRUE)
   
