@@ -39,6 +39,12 @@
     "Above100Years"
   )
   
+  CENSUS_HOUSEHOLDER_AGE_BRACKETS <<- c(
+    "25To44Years",
+    "45To64Years",
+    "65OrMoreYears"
+  )
+  
   CENSUS_INCOME_BRACKETS <<- c(
     "10000To14999USDollar",
     "15000To19999USDollar",

@@ -16,7 +16,28 @@
   return (.check_not_empty(value))
 }
 
-.get_provenance_info <- function(obj, geo_map, statvar_map) {
+.get_observation_table <- function(obj, geo_map, statvar_map, year) {
+  output <- data.frame(geoName=names(geo_map))
+  for (observation in names(statvar_map)) {
+    obs_df <- data.frame(geoName=names(geo_map))
+    statvar_values <- c()
+    for (geo_name in names(geo_map)) {
+      geo_dcid <- geo_map[[geo_name]]
+      place_data <- .get_place_data(obj, geo_dcid)
+      
+      statvar_dcid <- statvar_map[[observation]]
+      statvar_data <- .get_statvar_data(place_data, statvar_dcid)
+      
+      value <- .get_statvar_value_from_year(statvar_data, year)
+      statvar_values <- c(statvar_values, value)
+    }
+    obs_df[, observation] <- factor(statvar_values)
+    output <- merge(x=output, y=obs_df, by="geoName", all.x=TRUE)
+  }
+  return (output)
+}
+
+.get_provenance_table <- function(obj, geo_map, statvar_map) {
   
   output <- data.frame(geoName=names(geo_map), measurementMethod=NA,
                        provenanceDomain=NA, provenanceUrl=NA)
