@@ -14,8 +14,35 @@
   return (state_map)
 }
 
-.create_geo_dcid_map <- function(geo_names, level) {
+.create_county_dcid_map <- function(counties) {
+  county_map <- sapply(counties,
+                      function(x) {
+                        county <- trimws(gsub("^(.*?),.*", "\\1", x))
+                        state <- trimws(gsub("^.*,(.*)", "\\1", x))
+                        fips <- usmap::fips(county = county, state = state)
+                        paste0("geoId/", if(is.na(fips)) x else fips)},
+                      simplify = FALSE, USE.NAMES = TRUE)
+  return (state_map)
+}
+
+.create_geo_dcid_map <- function(geo_names) {
+  level = .determine_geo_level(geo_names[1])
   switch(level,
          zip = .create_zip_dcid_map(geo_names),
-         state = .create_state_dcid_map(geo_names))
+         state = .create_state_dcid_map(geo_names),
+         county = .)
+}
+
+.determine_geo_level <- function(geo_name) {
+  if (grepl("\\d{5}", geo_name)) {
+    return ("zip")
+  } else if (grepl("[A-Z]{2}", geo_name)) {
+    return ("state")
+  } else if (grepl("\\d{2}", geo_name)) {
+    return ("state")
+  } else if (grepl(",", geo_name)) {
+    return ("county")
+  } else {
+    return ("state")
+  }
 }

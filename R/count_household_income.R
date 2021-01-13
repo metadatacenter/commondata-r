@@ -1,7 +1,6 @@
-count_household_income <- function(geo_names, level=c(default="zip", "state"), 
-                                   start_year=2011, end_year=2018, year=NA) {
+count_household_income <- function(geo_names, start_year=2011, end_year=2018, year=NA) {
   
-  geo_map <- .create_geo_dcid_map(geo_names, match_arg(level))
+  geo_map <- .create_geo_dcid_map(geo_names)
   
   statvar_map <- sapply(CENSUS_INCOME_BRACKETS, 
                         function(x) paste0("Count_Household_IncomeOf", x), 

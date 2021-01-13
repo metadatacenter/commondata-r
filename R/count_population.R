@@ -2,8 +2,6 @@
 #' the observation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
-#' @param level optional, string indicating the geographical level. Should be
-#'    one of {"zip", "state"}. "zip" by default.
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
@@ -29,13 +27,12 @@
 #' count_population(zips, year=2012)
 #' 
 #' # Count the total population in California state
-#' count_population(c("California"), level="state") # State name
-#' count_population(c("CA"), level="state") # State code
-#' count_population(c("06"), level="state") # 2-digit state FIPS code
-count_population <- function(geo_names, level=c(default="zip", "state"), 
-                             start_year=2011, end_year=2018, year=NA) {
+#' count_population(c("California")) # State name
+#' count_population(c("CA")) # State code
+#' count_population(c("06")) # 2-digit state FIPS code
+count_population <- function(geo_names, start_year=2011, end_year=2018, year=NA) {
   
-  geo_map <- .create_geo_dcid_map(geo_names, match_arg(level))
+  geo_map <- .create_geo_dcid_map(geo_names)
   
   statvar_map <- sapply(CENSUS_MOD2_AGE_BRACKETS, 
                         function(x) paste0("Count_Person_", x), 
@@ -48,8 +45,6 @@ count_population <- function(geo_names, level=c(default="zip", "state"),
 #' the observation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
-#' @param level optional, string indicating the geographical level. Should be
-#'    one of {"zip", "state"}. "zip" by default.
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
@@ -75,13 +70,12 @@ count_population <- function(geo_names, level=c(default="zip", "state"),
 #' count_male_population(zips, year=2012)
 #' 
 #' # Count the male population in California state
-#' count_male_population(c("California"), level="state") # State name
-#' count_male_population(c("CA"), level="state") # State code
-#' count_male_population(c("06"), level="state") # 2-digit state FIPS code
-count_male_population <- function(geo_names, level=c(default="zip", "state"), 
-                                  start_year=2011, end_year=2018, year=NA) {
+#' count_male_population(c("California")) # State name
+#' count_male_population(c("CA")) # State code
+#' count_male_population(c("06")) # 2-digit state FIPS code
+count_male_population <- function(geo_names, start_year=2011, end_year=2018, year=NA) {
 
-  geo_map <- .create_geo_dcid_map(geo_names, match_arg(level))
+  geo_map <- .create_geo_dcid_map(geo_names)
 
   statvar_map <- sapply(CENSUS_MOD1_AGE_BRACKETS, 
                         function(x) paste0("Count_Person_", x, "_Male"), 
@@ -94,8 +88,6 @@ count_male_population <- function(geo_names, level=c(default="zip", "state"),
 #' the observation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
-#' @param level optional, string indicating the geographical level. Should be
-#'    one of {"zip", "state"}. "zip" by default.
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
@@ -121,13 +113,12 @@ count_male_population <- function(geo_names, level=c(default="zip", "state"),
 #' count_male_population(zips, year=2012)
 #' 
 #' # Count the female population in California state
-#' count_female_population(c("California"), level="state") # State name
-#' count_female_population(c("CA"), level="state") # State code
-#' count_female_population(c("06"), level="state") # 2-digit state FIPS code
-count_female_population <- function(geo_names, level=c(default="zip", "state"), 
-                                    start_year=2011, end_year=2018, year=NA) {
+#' count_female_population(c("California")) # State name
+#' count_female_population(c("CA")) # State code
+#' count_female_population(c("06")) # 2-digit state FIPS code
+count_female_population <- function(geo_names, start_year=2011, end_year=2018, year=NA) {
   
-  geo_map <- .create_geo_dcid_map(geo_names, match_arg(level))
+  geo_map <- .create_geo_dcid_map(geo_names)
   
   statvar_map <- sapply(CENSUS_MOD1_AGE_BRACKETS, 
                         function(x) paste0("Count_Person_", x, "_Female"), 

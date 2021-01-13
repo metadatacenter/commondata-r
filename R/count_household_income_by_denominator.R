@@ -1,7 +1,6 @@
-count_household_income_by_age <- function(geo_names, level=c(default="zip", "state"), 
-                                          start_year=2011, end_year=2018, year=NA) {
+count_household_income_by_age <- function(geo_names, start_year=2011, end_year=2018, year=NA) {
   
-  geo_map <- .create_geo_dcid_map(geo_names, match_arg(level))
+  geo_map <- .create_geo_dcid_map(geo_names)
   
   statvar_with_denominator_map <- list()
   for (age_bracket in CENSUS_MOD3_AGE_BRACKETS) {
@@ -15,10 +14,9 @@ count_household_income_by_age <- function(geo_names, level=c(default="zip", "sta
                                                  start_year, end_year, year))
 }
 
-count_household_income_by_race <- function(geo_names, level=c(default="zip", "state"), 
-                                           start_year=2011, end_year=2018, year=NA) {
+count_household_income_by_race <- function(geo_names, start_year=2011, end_year=2018, year=NA) {
   
-  geo_map <- .create_geo_dcid_map(geo_names, match_arg(level))
+  geo_map <- .create_geo_dcid_map(geo_names)
   
   statvar_with_denominator_map <- list()
   for (race_category in CENSUS_RACE_CATEGORIES) {
