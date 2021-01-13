@@ -19,30 +19,11 @@ count_household_income <- function(geo_names, level=c(default="zip", "state"),
   
   output <- list()
   for (year in as.character(start_year:end_year)) {
-    # initialize main data frame
-    df1 <- data.frame(geoName=names(geo_map))
-    for (income_bracket in names(statvar_map)) {
-      # initialize data frame to store each statistical variable per zip code
-      df2 <- data.frame(geoName=names(geo_map))
-      statvar_values <- c()
-      for (geo_name in names(geo_map)) {
-        geo_dcid <- geo_map[[geo_name]]
-        place_data <- .get_place_data(http_response, geo_dcid)
-        
-        statvar_dcid <- statvar_map[[income_bracket]]
-        statvar_data <- .get_statvar_data(place_data, statvar_dcid)
-        
-        value <- .get_statvar_value_from_year(statvar_data, year)
-        statvar_values <- c(statvar_values, value)
-      }
-      df2[, income_bracket] <- factor(statvar_values)
-      df1 <- merge(x=df1, y=df2, by="geoName", all.x=TRUE)
-    }
-    provenance_df <- .get_provenance_info(http_response, geo_map, statvar_map)
-    
-    df1 <- merge(x=df1, y=provenance_df, by="geoName", all.x=TRUE)
-    rownames(df1) <- df1$geoName
-    output[[year]] <- df1
+    observation_table <- .get_observation_table(http_response, geo_map, statvar_map, year)
+    provenance_table <- .get_provenance_table(http_response, geo_map, statvar_map)
+    observation_table <- merge(x=observation_table, y=provenance_table, by="geoName", all.x=TRUE)
+    rownames(observation_table) <- observation_table$geoName
+    output[[year]] <- observation_table
   }
   return (output)
 }
