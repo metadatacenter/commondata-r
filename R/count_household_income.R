@@ -1,5 +1,6 @@
-#' Return the householders count per income bracket for the given ZIP codes and
-#' observation year(s) period.
+#' Return the householder count per income bracket for the given the geographical
+#' names (i.e., zip codes, state codes, state names, county names) and the 
+#' observation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
 #' @param start_year optional, integer indicating the start year of observation.

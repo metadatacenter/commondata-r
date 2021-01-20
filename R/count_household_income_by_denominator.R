@@ -1,5 +1,6 @@
-#' Return the householders count per income bracket and per age group for the
-#' given ZIP codes and observation year(s) period.
+#' Return the householder count per income bracket and per age group for the
+#' given the geographical names (i.e., zip codes, state codes, state names, 
+#' county names) and theobservation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
 #' @param start_year optional, integer indicating the start year of observation.
@@ -46,8 +47,9 @@ count_household_income_by_age <- function(geo_names, start_year=2011, end_year=2
                                                  start_year, end_year, year))
 }
 
-#' Return the householders count per income bracket and per race group for the
-#' given ZIP codes and observation year(s) period.
+#' Return the householder count per income bracket and per race group for the 
+#' given the geographical names (i.e., zip codes, state codes, state names, 
+#' county names) and the observation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
 #' @param start_year optional, integer indicating the start year of observation.

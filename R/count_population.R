@@ -1,5 +1,6 @@
-#' Return the total population count per age group for the given the ZIP codes
-#' and the observation year(s) period.
+#' Return the human population count per age group for the given the geographical
+#' names (i.e., zip codes, state codes, state names, county names) and the 
+#' observation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
 #' @param start_year optional, integer indicating the start year of observation.
@@ -10,23 +11,23 @@
 #'    This parameter overrides the start_year and end_year parameters when
 #'    it is not NA, such that start_year=year and end_year=year. NA by default.
 #' @return  A named list with each list item is a data frame containing the 
-#'    total population count of each region per age group. The data frame is 
+#'    human population count of each region per age group. The data frame is 
 #'    identified by the observation year.
 #'     
 #' @export
 #' @examples
 #' zips <- c("94035","94039","94040","94041","94042","94043")
 #' 
-#' # Count the total population in the specified ZIP codes
+#' # Count the human population in the specified ZIP codes
 #' count_population(zips)
 #' 
-#' # Count the total population from 2012 to 2015
+#' # Count the human population from 2012 to 2015
 #' count_population(zips, start_year=2012, end_year=2015)
 #' 
-#' # Count the total population in 2012
+#' # Count the human population in 2012
 #' count_population(zips, year=2012)
 #' 
-#' # Count the total population in California state
+#' # Count the human population in California state
 #' count_population(c("California")) # State name
 #' count_population(c("CA")) # State code
 #' count_population(c("06")) # 2-digit state FIPS code
@@ -41,8 +42,9 @@ count_population <- function(geo_names, start_year=2011, end_year=2018, year=NA)
   return (.count_population(geo_map, statvar_map, start_year, end_year, year))
 }
 
-#' Return the male population count per age group for the given the ZIP codes
-#' and the observation year(s) period.
+#' Return the male human population count per age group for the given the
+#' geographical names (i.e., zip codes, state codes, state names, county names) 
+#' and theobservation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
 #' @param start_year optional, integer indicating the start year of observation.
@@ -84,7 +86,8 @@ count_male_population <- function(geo_names, start_year=2011, end_year=2018, yea
   return (.count_population(geo_map, statvar_map, start_year, end_year, year))
 }
 
-#' Return the female population count per age group for the given the ZIP codes
+#' Return the female human population count per age group for the given the 
+#' geographical names (i.e., zip codes, state codes, state names, county names)
 #' and the observation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
