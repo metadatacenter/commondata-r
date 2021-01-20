@@ -59,6 +59,12 @@
     "65OrMoreYears"
   )
   
+  CENSUS_MOD4_AGE_BRACKETS <<- c(
+    "15OrMoreYears",
+    "16OrMoreYears",
+    "25OrMoreYears"
+  )
+  
   CENSUS_RACE_CATEGORIES <<- c(
     "WhiteAlone",
     "BlackOrAfricanAmericanAlone",
