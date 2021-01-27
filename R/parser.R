@@ -10,9 +10,9 @@
   return (obj[1][[SOURCE_SERIES]][1][[1]])
 }
 
-.get_statvar_value_from_year <- function(obj, year) {
+.get_statvar_value <- function(obj, temporal) {
   source_series_values <- .get_source_series(obj)[[VAL]]
-  value <- source_series_values[[year]]
+  value <- source_series_values[[temporal]]
   return (.check_not_empty(value))
 }
 
