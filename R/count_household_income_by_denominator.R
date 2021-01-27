@@ -61,7 +61,7 @@ count_household_income_by_age <- function(geo_names, start_year=2011, end_year=2
 #'    it is not NA, such that start_year=year and end_year=year. NA by default.
 #' @return  A named list with each list item is a data frame containing the 
 #'    household income observations of each region per income bracket. The data
-#'    frame is identified by the observation year and rage group.
+#'    frame is identified by the observation year and race group.
 #'
 #' @export
 #' @examples
