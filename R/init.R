@@ -95,6 +95,79 @@
     "200000OrMoreUSDollar"
   )
   
+  COVID19_INCIDENT_CASES <<- c(
+    "ConfirmedCase",
+    "ConfirmedOrProbableCase",
+    "PatientHospitalized",
+    "PatientInICU",
+    "PatientOnVentilator",
+    "PatientRecovered",
+    "PatientDeceased"
+  )
+  
+  # US States
+  ALABAMA <<- c("Alabama")
+  ALASKA <<- c("Alaska")
+  ARIZONA <<- c("Arizona")
+  ARKANSAS <<- c("Arkansas")
+  CALIFORNIA <<- c("California")
+  COLORADO <<- c("Colorado")
+  CONNECTICUT <<- c("Connecticut")
+  DELAWARE <<- c("Delaware")
+  FLORIDA <<- c("Florida")
+  GEORGIA <<- c("Georgia")
+  HAWAII <<- c("Hawaii")
+  IDAHO <<- c("Idaho")
+  ILLINOIS <<- c("Illinois")
+  INDIANA <<- c("Indiana")
+  IOWA <<- c("Iowa")
+  KANSAS <<- c("Kansas")
+  KENTUCKY <<- c("Kentucky")
+  LOUISIANA <<- c("Louisiana")
+  MAINE <<- c("Maine")
+  MARYLAND <<- c("Maryland")
+  MASSACHUSETTS <<- c("Massachusetts")
+  MICHIGAN <<- c("Michigan")
+  MINNESOTA <<- c("Minnesota")
+  MISSISSIPPI <<- c("Mississippi")
+  MISSOURI <<- c("Missouri")
+  MONTANA <<- c("Montana")
+  NEBRASKA <<- c("Nebraska")
+  NEVADA <<- c("Nevada")
+  NEW_HAMPSHIRE <<- c("New Hampshire")
+  NEW_JERSEY <<- c("New Jersey")
+  NEW_MEXICO <<- c("New Mexico")
+  NEW_YORK <<- c("New York")
+  NORTH_CAROLINA <<- c("North Carolina")
+  NORTH_DAKOTA <<- c("North Dakota")
+  OHIO <<- c("Ohio")
+  OKLAHOMA <<- c("Oklahoma")
+  OREGON <<- c("Oregon")
+  PENNSYLVANIA <<- c("Pennsylvania")
+  RHODE_ISLAND <<- c("Rhode Island")
+  SOUTH_CAROLINA <<- c("South Carolina")
+  SOUTH_DAKOTA <<- c("South Dakota")
+  TENNESSEE <<- c("Tennessee")
+  TEXAS <<- c("Texas")
+  UTAH <<- c("Utah")
+  VERMONT <<- c("Vermont")
+  VIRGINIA <<- c("Virginia")
+  WASHINGTON <<- c("Washington")
+  WEST_VIRGINIA <<- c("West Virginia")
+  WISCONSIN <<- c("Wisconsin")
+  WYOMING <<- c("Wyoming")
+  
+  US_STATES <<- c(ALABAMA, ALASKA, ARIZONA, ARKANSAS, CALIFORNIA,
+                  COLORADO, CONNECTICUT, DELAWARE, FLORIDA, GEORGIA,
+                  HAWAII, IDAHO, ILLINOIS, INDIANA, IOWA, 
+                  KANSAS, KENTUCKY, LOUISIANA, MAINE, MARYLAND, 
+                  MASSACHUSETTS, MICHIGAN, MINNESOTA, MISSISSIPPI, MISSOURI, 
+                  MONTANA, NEBRASKA, NEVADA, NEW_HAMPSHIRE, NEW_JERSEY, 
+                  NEW_MEXICO, NEW_YORK, NORTH_CAROLINA, NORTH_DAKOTA, OHIO,
+                  OKLAHOMA, OREGON, PENNSYLVANIA, RHODE_ISLAND, SOUTH_CAROLINA,
+                  SOUTH_DAKOTA, TENNESSEE, TEXAS, UTAH, VERMONT, 
+                  VIRGINIA, WASHINGTON, WEST_VIRGINIA, WISCONSIN, WYOMING)
+  
   # ZIP codes
   # City level
   ALVISO_CITY_CA <<- c("95002")
