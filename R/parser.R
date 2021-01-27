@@ -1,5 +1,5 @@
-.get_place_data <- function(obj, zip_dcid) {
-  return (obj[[PLACE_DATA]][[zip_dcid]])
+.get_place_data <- function(obj, geo_dcid) {
+  return (obj[[PLACE_DATA]][[geo_dcid]])
 }
 
 .get_statvar_data <- function(obj, statvar_dcid) {
