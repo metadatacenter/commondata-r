@@ -44,6 +44,10 @@
   return (obj[[METADATA]])
 }
 
+.get_statvar_unit <- function(obj) {
+  return (.get_provenance_info(obj, UNIT))
+}
+
 .get_statvar_measurement_method <- function(obj) {
   return (.get_provenance_info(obj, MEASUREMENT_METHOD))
 }

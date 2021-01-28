@@ -84,15 +84,17 @@
 
 .get_provenance_table <- function(obj, geo_map, statvar_map, temporal) {
   
-  output <- data.frame(geoName=names(geo_map), measurementMethod=NA,
+  output <- data.frame(geoName=names(geo_map), unit=NA, measurementMethod=NA,
                        provenanceDomain=NA, provenanceUrl=NA)
   
+  units <- c()
   measurement_methods <- c()
   provenance_domains <- c()
   provenance_urls <- c()
   for (geo_name in names(geo_map)) {
     geo_dcid <- geo_map[[geo_name]]
     place_data <- .get_place_data(obj, geo_dcid)
+    unit <- NA
     measurement_method <- NA
     provenance_domain <- NA
     provenance_url <- NA
@@ -102,6 +104,7 @@
       
       statvar_value <- .get_statvar_value_by_temporal(statvar_data, temporal)
       if (!is.na(statvar_value)) {
+        unit <- .coalesce(unit, .get_statvar_unit(statvar_data))
         measurement_method <- .coalesce(measurement_method, 
                                         .get_statvar_measurement_method(statvar_data))
         provenance_domain <- .coalesce(provenance_domain, 
@@ -110,10 +113,12 @@
                                     .get_statvar_provenance_url(statvar_data))
       }
     }
+    units <- c(units, unit)
     measurement_methods <- c(measurement_methods, measurement_method)
     provenance_domains <- c(provenance_domains, provenance_domain)
     provenance_urls <- c(provenance_urls, provenance_url)
   }
+  output$unit <- factor(units)
   output$measurementMethod <- factor(measurement_methods)
   output$provenanceDomain <- factor(provenance_domains)
   output$provenanceUrl <- factor(provenance_urls)
