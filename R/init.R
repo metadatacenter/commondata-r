@@ -3,16 +3,23 @@
   # REST APIs
   DCAPI <- "http://api.datacommons.org/"
   DCAPI_STAT_ALL <<- paste0(DCAPI, "stat/all")
+  DCAPI_STAT_SET <<- paste0(DCAPI, "stat/set")
   
   # Return payload keywords
+  DATA <<- "data"
   PLACE_DATA <<- "placeData"
   STATVAR_DATA <<- "statVarData"
   SOURCE_SERIES <<- "sourceSeries"
   VAL <<- "val"
+  VALUE <<- "value"
+  STAT <<- "stat"
+  DATE <<- "date"
+  METADATA <<- "metadata"
   MEASUREMENT_METHOD <<- "measurementMethod"
   IMPORT_NAME <<- "importName"
   PROVENANCE_DOMAIN <<- "provenanceDomain"
   PROVENANCE_URL <<- "provenanceUrl"
+  UNIT <<- "unit"
   
   # Statistical variables group
   CENSUS_MOD1_AGE_BRACKETS <<- c(
