@@ -28,8 +28,8 @@
                                                    start_temporal, end_temporal,
                                                    temporal_point) {
   
-  start_temporal <- if (!is.na(temporal_point)) year else start_temporal
-  end_temporal <- if (!is.na(temporal_point)) year else end_temporal
+  start_temporal <- if (!is.na(temporal_point)) temporal_point else start_temporal
+  end_temporal <- if (!is.na(temporal_point)) temporal_point else end_temporal
   
   body <- jsonlite::toJSON(list(
     stat_vars = as.vector(unlist(statvar_with_denominator_map)), 
