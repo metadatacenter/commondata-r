@@ -73,7 +73,7 @@
       statvar_dcid <- statvar_map[[observation]]
       statvar_data <- .get_statvar_data(place_data, statvar_dcid)
       
-      value <- .get_statvar_value(statvar_data, temporal)
+      value <- .get_statvar_value_by_temporal(statvar_data, temporal)
       statvar_values <- c(statvar_values, value)
     }
     obs_df[, observation] <- statvar_values
@@ -100,7 +100,7 @@
       statvar_dcid <- statvar_map[[statvar]]
       statvar_data <- .get_statvar_data(place_data, statvar_dcid)
       
-      statvar_value <- .get_statvar_value(statvar_data, temporal)
+      statvar_value <- .get_statvar_value_by_temporal(statvar_data, temporal)
       if (!is.na(statvar_value)) {
         measurement_method <- .coalesce(measurement_method, 
                                         .get_statvar_measurement_method(statvar_data))

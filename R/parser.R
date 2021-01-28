@@ -24,7 +24,7 @@
   return (obj[1][[SOURCE_SERIES]][1][[1]])
 }
 
-.get_statvar_value <- function(obj, temporal) {
+.get_statvar_value_by_temporal <- function(obj, temporal) {
   source_series_values <- .get_source_series(obj)[[VAL]]
   value <- source_series_values[[temporal]]
   return (.check_not_empty(value))
