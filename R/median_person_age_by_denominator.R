@@ -38,7 +38,7 @@ median_person_age_by_race <- function(geo_names, start_year=2011, end_year=2018,
   statvar_with_denominator_map <- list()
   for (race_category in CENSUS_RACE_CATEGORIES) {
     statvar_with_denominator_map[[race_category]] <- 
-      sapply(c("Age"),
+      sapply(c("age"),
              function(x) paste0("Median_", x, "_Person_", race_category),
              simplify = FALSE, USE.NAMES = TRUE)
   }

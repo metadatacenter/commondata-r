@@ -35,7 +35,7 @@ median_person_age <- function(geo_names, start_year=2011, end_year=2018, year=NA
   
   geo_map <- .create_geo_dcid_map(geo_names)
   
-  statvar_map <- list(Age = "Median_Age_Person")
+  statvar_map <- list(age = "Median_Age_Person")
   
   return (.median_person_age(geo_map, statvar_map, start_year, end_year, year))
 }
@@ -77,7 +77,7 @@ median_male_person_age <- function(geo_names, start_year=2011, end_year=2018, ye
   
   geo_map <- .create_geo_dcid_map(geo_names)
   
-  statvar_map <- list(Age = "Median_Age_Person_Male")
+  statvar_map <- list(age = "Median_Age_Person_Male")
   
   return (.median_person_age(geo_map, statvar_map, start_year, end_year, year))
 }
@@ -119,7 +119,7 @@ median_female_person_age <- function(geo_names, start_year=2011, end_year=2018, 
   
   geo_map <- .create_geo_dcid_map(geo_names)
   
-  statvar_map <- list(Age = "Median_Age_Person_Female")
+  statvar_map <- list(age = "Median_Age_Person_Female")
   
   return (.median_person_age(geo_map, statvar_map, start_year, end_year, year))
 }
