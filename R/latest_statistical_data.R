@@ -25,7 +25,7 @@ latest_statistical_data <- function(zips, statvars, verbose=TRUE) {
   df <- .get_latest_statistical_data(geo_map, statvar_map)
   
   if (!verbose) {
-    df <- df[, -grep("_Year", colnames(df))]
+    df <- df[, -grep("_Date", colnames(df))]
   }
   
   return(df)
@@ -65,7 +65,7 @@ latest_statistical_data <- function(zips, statvars, verbose=TRUE) {
       statvar_temporal <- c(statvar_temporal, temporal)
     }
     obs_df[, observation] <- statvar_values
-    obs_df[, paste0(observation, "_Year")] <- statvar_temporal
+    obs_df[, paste0(observation, "_Date")] <- statvar_temporal
     output <- merge(x=output, y=obs_df, by="zipCode", all.x=TRUE)
   }
   return (output)
