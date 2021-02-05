@@ -2,7 +2,9 @@
 #' given the geographical names (i.e., zip codes, state codes, state names, 
 #' county names) and theobservation year period.
 #' 
-#' @param geo_names required, vector of string(s) of geographical names
+#' @param geo_names required, vector of string(s) of geographical names.
+#' @param location_type optional, string indicating the location type of the
+#'    geographical names. NA by default.
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
@@ -31,9 +33,12 @@
 #' count_household_income_by_age(c("California")) # State name
 #' count_household_income_by_age(c("CA")) # State code
 #' count_household_income_by_age(c("06")) # 2-digit state FIPS code
-count_household_income_by_age <- function(geo_names, start_year=2011, end_year=2018, year=NA) {
+count_household_income_by_age <- function(geo_names,
+                                          location_type=c(NA, "zip", "county", "state"),
+                                          start_year=2011, end_year=2018, year=NA) {
   
-  geo_map <- .create_geo_dcid_map(geo_names)
+  location_type <- match.arg(location_type)
+  geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
   statvar_with_denominator_map <- list()
   for (age_bracket in CENSUS_MOD3_AGE_BRACKETS) {
@@ -51,7 +56,9 @@ count_household_income_by_age <- function(geo_names, start_year=2011, end_year=2
 #' given the geographical names (i.e., zip codes, state codes, state names, 
 #' county names) and the observation year period.
 #' 
-#' @param geo_names required, vector of string(s) of geographical names
+#' @param geo_names required, vector of string(s) of geographical names.
+#' @param location_type optional, string indicating the location type of the
+#'    geographical names. NA by default.
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
@@ -80,9 +87,12 @@ count_household_income_by_age <- function(geo_names, start_year=2011, end_year=2
 #' count_household_income_by_race(c("California")) # State name
 #' count_household_income_by_race(c("CA")) # State code
 #' count_household_income_by_race(c("06")) # 2-digit state FIPS code
-count_household_income_by_race <- function(geo_names, start_year=2011, end_year=2018, year=NA) {
+count_household_income_by_race <- function(geo_names,
+                                           location_type=c(NA, "zip", "county", "state"),
+                                           start_year=2011, end_year=2018, year=NA) {
   
-  geo_map <- .create_geo_dcid_map(geo_names)
+  location_type <- match.arg(location_type)
+  geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
   statvar_with_denominator_map <- list()
   for (race_category in CENSUS_RACE_CATEGORIES) {

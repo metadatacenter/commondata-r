@@ -2,7 +2,9 @@
 #' given the geographical names (i.e., zip codes, state codes, state names, 
 #' county names) and the observation date period.
 #' 
-#' @param geo_names required, vector of string(s) of geographical names
+#' @param geo_names required, vector of string(s) of geographical names.
+#' @param location_type optional, string indicating the location type of the
+#'    geographical names. NA by default.
 #' @param start_date optional, date indicating the start date of observation.
 #'    "2020-01-01" by default.
 #' @param end_date optional, date indicating the end date of observation.
@@ -26,12 +28,14 @@
 #' 
 #' # Count the cumulative count of COVID-19 incidents 10 days ago from today
 #' cumulative_count_covid19_incident(states, date=Sys.Date()-10)
-cumulative_count_covid19_incident <- function(geo_names, 
+cumulative_count_covid19_incident <- function(geo_names,
+                                              location_type=c(NA, "zip", "county", "state"),
                                               start_date="2020-01-01",
                                               end_date="2020-03-31",
                                               date=NA) {
   
-  geo_map <- .create_geo_dcid_map(geo_names)
+  location_type <- match.arg(location_type)
+  geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
   start_date <- as.Date(start_date, format="%Y-%m-%d")
   end_date <- as.Date(end_date, format="%Y-%m-%d")

@@ -2,8 +2,8 @@
 #' the list of the statistical variables.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
-#' @param level optional, string indicating the level of the geographical names,
-#'    such as "zip", "county", "state", and so on. "zip" by default
+#' @param location_type optional, string indicating the location type of the
+#'    geographical names. NA by default.
 #' @param statvars required, vector of statistical variables. The variable list
 #'    can be found at https://docs.datacommons.org/statistical_variables.html
 #' @param verbose optional, boolean whether the time information should be
@@ -20,9 +20,12 @@
 #' states <- c("AR", "CA", "NY", "WA")
 #' statvars <- c("Count_Person", "Median_Age_Person")
 #' latest_statistical_data(states, level="state", statvars)
-latest_statistical_data <- function(geo_names, level="zip", statvars, verbose=TRUE) {
+latest_statistical_data <- function(geo_names,
+                                    location_type=c(NA, "zip", "county", "state"),
+                                    statvars, verbose=TRUE) {
   
-  geo_map <- .create_geo_dcid_map(geo_names, level)
+  location_type <- match.arg(location_type)
+  geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
   statvar_map <- sapply(statvars, 
                         function(x) x, 

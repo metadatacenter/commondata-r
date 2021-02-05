@@ -2,7 +2,9 @@
 #' names (i.e., zip codes, state codes, state names, county names) and the 
 #' observation year period.
 #' 
-#' @param geo_names required, vector of string(s) of geographical names
+#' @param geo_names required, vector of string(s) of geographical names.
+#' @param location_type optional, string indicating the location type of the
+#'    geographical names. NA by default.
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
@@ -31,9 +33,12 @@
 #' median_person_income(c("California")) # State name
 #' median_person_income(c("CA")) # State code
 #' median_person_income(c("06")) # 2-digit state FIPS code
-median_person_age <- function(geo_names, start_year=2011, end_year=2018, year=NA) {
+median_person_age <- function(geo_names,
+                              location_type=c(NA, "zip", "county", "state"),
+                              start_year=2011, end_year=2018, year=NA) {
   
-  geo_map <- .create_geo_dcid_map(geo_names)
+  location_type <- match.arg(location_type)
+  geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
   statvar_map <- list(age = "Median_Age_Person")
   
@@ -44,7 +49,9 @@ median_person_age <- function(geo_names, start_year=2011, end_year=2018, year=NA
 #' names (i.e., zip codes, state codes, state names, county names) and the 
 #' observation year period.
 #' 
-#' @param geo_names required, vector of string(s) of geographical names
+#' @param geo_names required, vector of string(s) of geographical names.
+#' @param location_type optional, string indicating the location type of the
+#'    geographical names. NA by default.
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
@@ -73,9 +80,12 @@ median_person_age <- function(geo_names, start_year=2011, end_year=2018, year=NA
 #' median_male_person_age(c("California")) # State name
 #' median_male_person_age(c("CA")) # State code
 #' median_male_person_age(c("06")) # 2-digit state FIPS code
-median_male_person_age <- function(geo_names, start_year=2011, end_year=2018, year=NA) {
+median_male_person_age <- function(geo_names,
+                                   location_type=c(NA, "zip", "county", "state"),
+                                   start_year=2011, end_year=2018, year=NA) {
   
-  geo_map <- .create_geo_dcid_map(geo_names)
+  location_type <- match.arg(location_type)
+  geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
   statvar_map <- list(age = "Median_Age_Person_Male")
   
@@ -86,7 +96,9 @@ median_male_person_age <- function(geo_names, start_year=2011, end_year=2018, ye
 #' names (i.e., zip codes, state codes, state names, county names) and the 
 #' observation year period.
 #' 
-#' @param geo_names required, vector of string(s) of geographical names
+#' @param geo_names required, vector of string(s) of geographical names.
+#' @param location_type optional, string indicating the location type of the
+#'    geographical names. NA by default.
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
@@ -115,9 +127,12 @@ median_male_person_age <- function(geo_names, start_year=2011, end_year=2018, ye
 #' median_female_person_age(c("California")) # State name
 #' median_female_person_age(c("CA")) # State code
 #' median_female_person_age(c("06")) # 2-digit state FIPS code
-median_female_person_age <- function(geo_names, start_year=2011, end_year=2018, year=NA) {
+median_female_person_age <- function(geo_names,
+                                     location_type=c(NA, "zip", "county", "state"),
+                                     start_year=2011, end_year=2018, year=NA) {
   
-  geo_map <- .create_geo_dcid_map(geo_names)
+  location_type <- match.arg(location_type)
+  geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
   statvar_map <- list(age = "Median_Age_Person_Female")
   
