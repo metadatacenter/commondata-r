@@ -1,7 +1,9 @@
-#' Return the latest statistical data given the list of zip codes and the list
-#' of the statistical variables.
+#' Return the latest statistical data given the list of geographical names and
+#' the list of the statistical variables.
 #' 
-#' @param zips required, vector of string(s) of geographical names
+#' @param geo_names required, vector of string(s) of geographical names
+#' @param level optional, string indicating the level of the geographical names,
+#'    such as "zip", "county", "state", and so on. "zip" by default
 #' @param statvars required, vector of statistical variables. The variable list
 #'    can be found at https://docs.datacommons.org/statistical_variables.html
 #' @param verbose optional, boolean whether the time information should be
@@ -12,11 +14,15 @@
 #' @export
 #' @examples
 #' zips <- c("94035","94039","94040","94041","94042","94043")
-#' statvars <-("Count_Person", "Median_Age_Person")
+#' statvars <- c("Count_Person", "Median_Age_Person")
 #' latest_statistical_data(zips, statvars)
-latest_statistical_data <- function(zips, statvars, verbose=TRUE) {
+#' 
+#' states <- c("AR", "CA", "NY", "WA")
+#' statvars <- c("Count_Person", "Median_Age_Person")
+#' latest_statistical_data(states, level="state", statvars)
+latest_statistical_data <- function(geo_names, level="zip", statvars, verbose=TRUE) {
   
-  geo_map <- .create_geo_dcid_map(zips)
+  geo_map <- .create_geo_dcid_map(geo_names, level)
   
   statvar_map <- sapply(statvars, 
                         function(x) x, 

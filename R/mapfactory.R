@@ -25,12 +25,15 @@
   return (state_map)
 }
 
-.create_geo_dcid_map <- function(geo_names) {
-  level = .determine_geo_level(geo_names[1])
+.create_geo_dcid_map <- function(geo_names, level = NA) {
+  if (is.na(level)) {
+    sample_name = geo_names[1]
+    level <- .determine_geo_level(sample_name)
+  }
   switch(level,
          zip = .create_zip_dcid_map(geo_names),
          state = .create_state_dcid_map(geo_names),
-         county = .)
+         county = .create_county_dcid_map(geo_names))
 }
 
 .determine_geo_level <- function(geo_name) {
