@@ -47,16 +47,16 @@
   )
   
   CENSUS_MOD2_AGE_BRACKETS <<- c(
-    "Under15Years",
-    "15To17Years",
+    "5To17Years",
     "18To24Years",
     "25To34Years",
     "35To44Years",
     "45To54Years",
-    "55To64Years",
+    "55To59Years",
+    "60To61Years",
+    "62To64Years",
     "65To74Years",
-    "75To84Years",
-    "Above85Years"
+    "75OrMoreYears"
   )
   
   CENSUS_MOD3_AGE_BRACKETS <<- c(
