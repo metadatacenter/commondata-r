@@ -34,7 +34,7 @@
 #' count_population(c("CA")) # State code
 #' count_population(c("06")) # 2-digit state FIPS code
 count_population <- function(geo_names,
-                             location_type=c(NA, "zip", "county", "state"),
+                             location_type=c(NA, "zip", "county", "state", "school"),
                              start_year=2011, end_year=2018, year=NA) {
   
   location_type <- match.arg(location_type)
@@ -83,7 +83,7 @@ count_population <- function(geo_names,
 #' count_male_population(c("CA")) # State code
 #' count_male_population(c("06")) # 2-digit state FIPS code
 count_male_population <- function(geo_names,
-                                  location_type=c(NA, "zip", "county", "state"),
+                                  location_type=c(NA, "zip", "county", "state", "school"),
                                   start_year=2011, end_year=2018, year=NA) {
 
   location_type <- match.arg(location_type)
@@ -132,7 +132,7 @@ count_male_population <- function(geo_names,
 #' count_male_population(c("CA")) # State code
 #' count_male_population(c("06")) # 2-digit state FIPS code
 count_female_population <- function(geo_names,
-                                    location_type=c(NA, "zip", "county", "state"),
+                                    location_type=c(NA, "zip", "county", "state", "school"),
                                     start_year=2011, end_year=2018, year=NA) {
   
   location_type <- match.arg(location_type)

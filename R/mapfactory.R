@@ -25,6 +25,13 @@
   return (state_map)
 }
 
+.create_school_district_dcid_map <- function(zips) {
+  zip_map <- sapply(zips, 
+                    function(x) paste0("geoId/sch", x), 
+                    simplify = FALSE, USE.NAMES = TRUE)
+  return (zip_map)
+}
+
 .create_geo_dcid_map <- function(geo_names, location_type=NA) {
   if (is.na(location_type)) {
     sample_name = geo_names[1]
@@ -33,7 +40,8 @@
   switch(location_type,
          zip = .create_zip_dcid_map(geo_names),
          state = .create_state_dcid_map(geo_names),
-         county = .create_county_dcid_map(geo_names))
+         county = .create_county_dcid_map(geo_names),
+         school = .create_school_district_dcid_map(geo_names))
 }
 
 .determine_location_type <- function(geo_name) {
