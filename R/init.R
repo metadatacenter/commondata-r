@@ -22,12 +22,15 @@
   UNIT <<- "unit"
   
   # Statistical variables group
-  CENSUS_MOD1_AGE_BRACKETS <<- c(
-    "Under5Years",
+  CENSUS_B01001_AGE_GROUPS <<- c(
+    "Upto5Years",
     "5To9Years",
     "10To14Years",
-    "15To19Years",
-    "20To24Years",
+    "15To17Years",
+    "18To19Years",
+    "20Years",
+    "21Years",
+    "22To24Years",
     "25To29Years",
     "30To34Years",
     "35To39Years",
@@ -35,41 +38,21 @@
     "45To49Years",
     "50To54Years",
     "55To59Years",
-    "60To64Years",
-    "65To69Years",
+    "60To61Years",
+    "62To64Years",
+    "65To66Years",
+    "67To69Years",
     "70To74Years",
     "75To79Years",
     "80To84Years",
-    "85To89Years",
-    "90To94Years",
-    "94To99Years",
-    "Above100Years"
+    "85OrMoreYears"
   )
   
-  CENSUS_MOD2_AGE_BRACKETS <<- c(
-    "5To17Years",
-    "18To24Years",
-    "25To34Years",
-    "35To44Years",
-    "45To54Years",
-    "55To59Years",
-    "60To61Years",
-    "62To64Years",
-    "65To74Years",
-    "75OrMoreYears"
-  )
-  
-  CENSUS_MOD3_AGE_BRACKETS <<- c(
+  CENSUS_B19049_AGE_GROUPS <<- c(
     "Under25Years",
     "25To44Years",
     "45To64Years",
     "65OrMoreYears"
-  )
-  
-  CENSUS_MOD4_AGE_BRACKETS <<- c(
-    "15OrMoreYears",
-    "16OrMoreYears",
-    "25OrMoreYears"
   )
   
   CENSUS_RACE_CATEGORIES <<- c(

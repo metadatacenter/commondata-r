@@ -41,7 +41,7 @@ count_household_income_by_age <- function(geo_names,
   geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
   statvar_with_denominator_map <- list()
-  for (age_bracket in CENSUS_MOD3_AGE_BRACKETS) {
+  for (age_bracket in CENSUS_B19049_AGE_GROUPS) {
     statvar_with_denominator_map[[age_bracket]] <- 
       sapply(CENSUS_INCOME_BRACKETS,
              function(x) paste0("Count_Household_HouseholderAge", age_bracket, "_IncomeOf", x),
