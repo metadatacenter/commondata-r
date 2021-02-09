@@ -14,7 +14,6 @@ License: Apache License, Version 2.0
 Encoding: UTF-8
 LazyData: true
 Imports:
-	data.table (>= 1.9.4),
 	dplyr,
     tidyverse,
     httr,
