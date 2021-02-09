@@ -6,10 +6,19 @@
 geographical names (i.e., zip codes, state codes, state names, county names)
 and theobservation year period.}
 \usage{
-count_male_population(geo_names, start_year = 2011, end_year = 2018, year = NA)
+count_male_population(
+  geo_names,
+  location_type = c(NA, "zip", "county", "state", "school"),
+  start_year = 2011,
+  end_year = 2018,
+  year = NA
+)
 }
 \arguments{
 \item{geo_names}{required, vector of string(s) of geographical names}
+
+\item{location_type}{optional, string indicating the location type of the
+geographical names. NA by default.}
 
 \item{start_year}{optional, integer indicating the start year of observation.
 2011 by default.}

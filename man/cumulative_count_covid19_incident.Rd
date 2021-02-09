@@ -8,13 +8,17 @@ county names) and the observation date period.}
 \usage{
 cumulative_count_covid19_incident(
   geo_names,
+  location_type = c(NA, "zip", "county", "state"),
   start_date = "2020-01-01",
   end_date = "2020-03-31",
   date = NA
 )
 }
 \arguments{
-\item{geo_names}{required, vector of string(s) of geographical names}
+\item{geo_names}{required, vector of string(s) of geographical names.}
+
+\item{location_type}{optional, string indicating the location type of the
+geographical names. NA by default.}
 
 \item{start_date}{optional, date indicating the start date of observation.
 "2020-01-01" by default.}

@@ -2,13 +2,21 @@
 % Please edit documentation in R/latest_statistical_data.R
 \name{latest_statistical_data}
 \alias{latest_statistical_data}
-\title{Return the latest statistical data given the list of zip codes and the list
-of the statistical variables.}
+\title{Return the latest statistical data given the list of geographical names and
+the list of the statistical variables.}
 \usage{
-latest_statistical_data(zips, statvars, verbose = TRUE)
+latest_statistical_data(
+  geo_names,
+  location_type = c(NA, "zip", "county", "state"),
+  statvars,
+  verbose = TRUE
+)
 }
 \arguments{
-\item{zips}{required, vector of string(s) of geographical names}
+\item{geo_names}{required, vector of string(s) of geographical names}
+
+\item{location_type}{optional, string indicating the location type of the
+geographical names. NA by default.}
 
 \item{statvars}{required, vector of statistical variables. The variable list
 can be found at https://docs.datacommons.org/statistical_variables.html}
@@ -21,11 +29,15 @@ A data frame containing the values of each statistical variable
 per zip code.
 }
 \description{
-Return the latest statistical data given the list of zip codes and the list
-of the statistical variables.
+Return the latest statistical data given the list of geographical names and
+the list of the statistical variables.
 }
 \examples{
 zips <- c("94035","94039","94040","94041","94042","94043")
-statvars <-("Count_Person", "Median_Age_Person")
+statvars <- c("Count_Person", "Median_Age_Person")
 latest_statistical_data(zips, statvars)
+
+states <- c("AR", "CA", "NY", "WA")
+statvars <- c("Count_Person", "Median_Age_Person")
+latest_statistical_data(states, level="state", statvars)
 }

@@ -6,10 +6,19 @@
 names (i.e., zip codes, state codes, state names, county names) and the
 observation year period.}
 \usage{
-median_person_age(geo_names, start_year = 2011, end_year = 2018, year = NA)
+median_person_age(
+  geo_names,
+  location_type = c(NA, "zip", "county", "state"),
+  start_year = 2011,
+  end_year = 2018,
+  year = NA
+)
 }
 \arguments{
-\item{geo_names}{required, vector of string(s) of geographical names}
+\item{geo_names}{required, vector of string(s) of geographical names.}
+
+\item{location_type}{optional, string indicating the location type of the
+geographical names. NA by default.}
 
 \item{start_year}{optional, integer indicating the start year of observation.
 2011 by default.}
