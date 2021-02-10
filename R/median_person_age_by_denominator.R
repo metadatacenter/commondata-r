@@ -55,6 +55,6 @@ median_person_age_by_race <- function(geo_names,
 .median_person_age_by_denominator <- function(geo_map, statvar_with_denominator_map,
                                               start_year, end_year, year) {
   
-  return (.get_statistical_data_with_denominator(geo_map, statvar_with_denominator_map,
-                                                 start_year, end_year, year))
+  return (.get_statistical_data(geo_map, statvar_with_denominator_map,
+                                start_year, end_year, year))
 }

@@ -1,5 +1,13 @@
-.check_not_empty <- function(value) {
-  return (if (is.null(value)) NA else value)
+.check_not_empty <- function(v) {
+  return (if (is.null(v)) NA else v)
+}
+
+.is_nested <- function(l) {
+  stopifnot(is.list(l))
+  for (i in l) {
+    if (is.list(i)) return(TRUE)
+  }
+  return(FALSE)
 }
 
 .coalesce <- function(v1, v2) {

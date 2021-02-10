@@ -14,51 +14,31 @@
   output <- list()
   temporal_range <- seq(start_temporal, end_temporal, by=1)
   for (temporal in as.character(temporal_range)) {
-    observation_table <- .get_observation_table(http_response, geo_map, statvar_map, temporal)
-    if (.has_observations(observation_table)) {
-      provenance_table <- .get_provenance_table(http_response, geo_map, statvar_map, temporal)
-      observation_table <- merge(x=observation_table, y=provenance_table, by="geoName", all.x=TRUE)
-      output[[temporal]] <- observation_table
-    }
+    observation_table <- .get_observation_table_recursively(
+      http_response, geo_map, statvar_map, temporal)
+    output[[temporal]] <- observation_table
   }
   return (output)
 }
 
-.get_statistical_data_with_denominator <- function(geo_map, statvar_with_denominator_map,
-                                                   start_temporal, end_temporal,
-                                                   temporal_point) {
+.get_observation_table_recursively <- function(http_response, geo_map, statvar_map, temporal) {
   
-  start_temporal <- if (!is.na(temporal_point)) temporal_point else start_temporal
-  end_temporal <- if (!is.na(temporal_point)) temporal_point else end_temporal
-  
-  body <- jsonlite::toJSON(list(
-    stat_vars = as.vector(unlist(statvar_with_denominator_map)), 
-    places = as.vector(unlist(geo_map))), 
-    auto_unbox = TRUE)
-  
-  http_response <- .http_post(DCAPI_STAT_ALL, body);
-  
-  output <- list()
-  temporal_range <- seq(start_temporal, end_temporal, by=1)
-  for (temporal in as.character(temporal_range)) {
+  if (.is_nested(statvar_map)) {
     data <- list()
-    has_observations = c()
-    for (denominator in names(statvar_with_denominator_map)) {
-      statvar_map <- statvar_with_denominator_map[[denominator]]
-      observation_table <- .get_observation_table(http_response, geo_map, statvar_map, temporal)
-      has_observation <- .has_observations(observation_table)
-      if (has_observation) {
-        provenance_table <- .get_provenance_table(http_response, geo_map, statvar_map, temporal)
-        observation_table <- merge(x=observation_table, y=provenance_table, by="geoName", all.x=TRUE)
-        data[[denominator]] <- observation_table
-      }
-      has_observations <- c(has_observations, has_observation)
+    for (denominator in names(statvar_map)) {
+      obs_table <- .get_observation_table_recursively(
+        http_response, geo_map, statvar_map[[denominator]], temporal)
+      data[[denominator]] <- obs_table
     }
-    if (any(has_observations)) {
-      output[[temporal]] <- data
+    return(data)
+  } else {
+    obs_table <- .get_observation_table(http_response, geo_map, statvar_map, temporal)
+    if (.has_observations(obs_table)) {
+      prov_table <- .get_provenance_table(http_response, geo_map, statvar_map, temporal)
+      obs_table <- merge(x=obs_table, y=prov_table, by="geoName", all.x=TRUE)
     }
+    return(obs_table)
   }
-  return (output)
 }
 
 .get_observation_table <- function(obj, geo_map, statvar_map, temporal) {
