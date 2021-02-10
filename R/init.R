@@ -22,7 +22,7 @@
   UNIT <<- "unit"
   
   # Statistical variables group
-  CENSUS_SEX_GROUPS <<- c(
+  CENSUS_SEX_CATEGORIES <<- c(
     "Male",
     "Female")
   
