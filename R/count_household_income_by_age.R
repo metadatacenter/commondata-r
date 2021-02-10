@@ -1,6 +1,6 @@
 #' Return the householder count per income bracket and per age group for the
 #' given the geographical names (i.e., zip codes, state codes, state names, 
-#' county names) and theobservation year period.
+#' county names) and the observation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names.
 #' @param location_type optional, string indicating the location type of the

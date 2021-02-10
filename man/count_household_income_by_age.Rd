@@ -4,7 +4,7 @@
 \alias{count_household_income_by_age}
 \title{Return the householder count per income bracket and per age group for the
 given the geographical names (i.e., zip codes, state codes, state names,
-county names) and theobservation year period.}
+county names) and the observation year period.}
 \usage{
 count_household_income_by_age(
   geo_names,
@@ -38,7 +38,7 @@ frame is identified by the observation year and age group.
 \description{
 Return the householder count per income bracket and per age group for the
 given the geographical names (i.e., zip codes, state codes, state names,
-county names) and theobservation year period.
+county names) and the observation year period.
 }
 \examples{
 zips <- c("94035","94039","94040","94041","94042","94043")
