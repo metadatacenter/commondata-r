@@ -40,7 +40,7 @@ median_person_income <- function(geo_names,
   location_type <- match.arg(location_type)
   geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
-  statvar_map <- sapply(CENSUS_MOD4_AGE_BRACKETS, 
+  statvar_map <- sapply(CENSUS_PERSON_WITH_INCOME_AGE_GROUPS, 
                         function(x) {
                           if (x == "15OrMoreYears")
                             paste0("Median_Income_Person") else
@@ -93,7 +93,7 @@ median_male_person_income <- function(geo_names,
   location_type <- match.arg(location_type)
   geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
-  statvar_map <- sapply(CENSUS_MOD4_AGE_BRACKETS, 
+  statvar_map <- sapply(CENSUS_PERSON_WITH_INCOME_AGE_GROUPS, 
                         function(x) paste0("Median_Income_Person_", x, "_Male_WithIncome"), 
                         simplify = FALSE, USE.NAMES = TRUE)
   
@@ -142,7 +142,7 @@ median_female_person_income <- function(geo_names,
   location_type <- match.arg(location_type)
   geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
-  statvar_map <- sapply(CENSUS_MOD4_AGE_BRACKETS, 
+  statvar_map <- sapply(CENSUS_PERSON_WITH_INCOME_AGE_GROUPS, 
                         function(x) paste0("Median_Income_Person_", x, "_Female_WithIncome"), 
                         simplify = FALSE, USE.NAMES = TRUE)
   

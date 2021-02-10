@@ -40,7 +40,7 @@ count_male_population <- function(geo_names,
   location_type <- match.arg(location_type)
   geo_map <- .create_geo_dcid_map(geo_names, location_type)
 
-  statvar_map <- sapply(CENSUS_B01001_AGE_GROUPS, 
+  statvar_map <- sapply(CENSUS_POPULATION_AGE_GROUPS, 
                         function(x) paste0("Count_Person_", x, "_Male"), 
                         simplify = FALSE, USE.NAMES = TRUE)
   
@@ -89,7 +89,7 @@ count_female_population <- function(geo_names,
   location_type <- match.arg(location_type)
   geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
-  statvar_map <- sapply(CENSUS_B01001_AGE_GROUPS, 
+  statvar_map <- sapply(CENSUS_POPULATION_AGE_GROUPS, 
                         function(x) paste0("Count_Person_", x, "_Female"), 
                         simplify = FALSE, USE.NAMES = TRUE)
   

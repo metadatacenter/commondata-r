@@ -40,21 +40,13 @@ median_person_age_by_race <- function(geo_names,
   location_type <- match.arg(location_type)
   geo_map <- .create_geo_dcid_map(geo_names, location_type)
   
-  statvar_with_denominator_map <- list()
-  for (race_category in CENSUS_RACE_CATEGORIES) {
-    statvar_with_denominator_map[[race_category]] <- 
+  statvar_map <- list()
+  for (race_group in CENSUS_RACE_GROUPS) {
+    statvar_map[[race_group]] <- 
       sapply(c("age"),
-             function(x) paste0("Median_", x, "_Person_", race_category),
+             function(x) paste0("Median_", x, "_Person_", race_group),
              simplify = FALSE, USE.NAMES = TRUE)
   }
   
-  return (.median_person_age_by_denominator(geo_map, statvar_with_denominator_map,
-                                            start_year, end_year, year))
-}
-
-.median_person_age_by_denominator <- function(geo_map, statvar_with_denominator_map,
-                                              start_year, end_year, year) {
-  
-  return (.get_statistical_data(geo_map, statvar_with_denominator_map,
-                                start_year, end_year, year))
+  return (.get_statistical_data(geo_map, statvar_map, start_year, end_year, year))
 }

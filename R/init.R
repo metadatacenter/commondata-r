@@ -22,7 +22,11 @@
   UNIT <<- "unit"
   
   # Statistical variables group
-  CENSUS_B01001_AGE_GROUPS <<- c(
+  CENSUS_SEX_GROUPS <<- c(
+    "Male",
+    "Female")
+  
+  CENSUS_PERSON_AGE_GROUPS <<- c(
     "Upto5Years",
     "5To9Years",
     "10To14Years",
@@ -48,14 +52,20 @@
     "85OrMoreYears"
   )
   
-  CENSUS_B19049_AGE_GROUPS <<- c(
+  CENSUS_PERSON_WITH_INCOME_AGE_GROUPS <<- c(
+    "15OrMoreYears",
+    "16OrMoreYears",
+    "25OrMoreYears"
+  )
+  
+  CENSUS_HOUSEHOLDER_AGE_GROUPS <<- c(
     "Under25Years",
     "25To44Years",
     "45To64Years",
     "65OrMoreYears"
   )
   
-  CENSUS_RACE_CATEGORIES <<- c(
+  CENSUS_RACE_GROUPS <<- c(
     "WhiteAlone",
     "BlackOrAfricanAmericanAlone",
     "AmericanIndianOrAlaskaNativeAlone",
