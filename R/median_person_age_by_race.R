@@ -42,10 +42,8 @@ median_person_age_by_race <- function(geo_names,
   
   statvar_map <- list()
   for (race_group in CENSUS_RACE_GROUPS) {
-    statvar_map[[race_group]] <- 
-      sapply(c("age"),
-             function(x) paste0("Median_", x, "_Person_", race_group),
-             simplify = FALSE, USE.NAMES = TRUE)
+    statvar <- paste0("Median_Age_Person_", race_group)
+    statvar_map[[race_group]] <- list(age = statvar)
   }
   
   return (.get_statistical_data(geo_map, statvar_map, start_year, end_year, year))
