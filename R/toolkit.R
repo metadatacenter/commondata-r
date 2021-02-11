@@ -1,29 +1,39 @@
-#' Combine two commondata data tables by aligning the table columns properly.
-#' The data are then grouped based on the group_cols and then aggregated using
-#' the function FUN parameters. The result is a new combined commondata data 
-#' table.
+#' Summarize multiple data frames by aggregating the numerical data of same
+#' grouping columns.
 #' 
-#' @param d1 required, the first commondata data table.
-#' @param d2 required, the second commondata data table.
-#' @param group_cols optional, the column names for the group operation.
-#'   "geoNames" and "provenanceDomain" columns are used by default.
-#' @param FUN optional, the function to aggregate the numerical data. The sum
-#'    operation is used by default.
-#' @return A new commondata data table
-#' 
-#' @export
-#' @examples 
-#' # Combine the count data between male and female populations in Palo Alto
-#' combine(count_female_population(PALO_ALTO_CITY_CA), count_male_population(PALO_ALTO_CITY_CA))
-combine <- function(d1, d2, group_cols=c("geoName","provenanceDomain"), FUN=sum) {
+#' @param ... required, the list of data frames.
+#' @param group_cols optional, the column names for applying the "group by" 
+#'   operation. The columns "geoNames" and "provenanceDomain" by default.
+#' @param FUN optional, the function to aggregate the numerical data. Sum by 
+#'   default.
+#' @return A new data frame
+summarize <- function(..., group_cols=c("geoName","provenanceDomain"), FUN=sum) {
   
-  d <- list()
-  temporal <- names(d1)
-  for (t in temporal) {
-    df <- bind_rows(d1[[t]], d2[[t]]) %>%
-          group_by(across(all_of(group_cols))) %>%
-          summarise_if(is.numeric, FUN)
-    d[[t]] <- as.data.frame(df)
+  df <- bind_rows(...) %>%
+        group_by(across(all_of(group_cols))) %>%
+        summarise_if(is.numeric, FUN) %>%
+        as.data.frame()
+  return(df)
+}
+
+#' Collapse a commondata table by aggregating the most end denominator.
+#' 
+#' @param table required, the commondata table.
+#' @param group_cols optional, the column names for applying the "group by" 
+#'   operation. The columns "geoNames" and "provenanceDomain" by default.
+#' @param FUN optional, the function to aggregate the numerical data. Sum by 
+#'   default.
+#' @return A new commondata table
+collapse <- function(table, group_cols=c("geoName","provenanceDomain"), FUN=sum) {
+  
+  contains_only_data_frames <- all(sapply(table, is.data.frame))
+  if (contains_only_data_frames) {
+    return(summarize(unname(table), group_cols=group_cols, FUN=FUN))
+  } else {
+    output <- list()
+    for (path in names(table)) {
+      output[[path]] <- collapse(table[[path]], group_cols, FUN)
+    }
+    return(output)
   }
-  return(d)
 }
