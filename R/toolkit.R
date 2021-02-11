@@ -12,7 +12,7 @@
 #' @return A new commondata data table
 #' 
 #' @export
-#' @example 
+#' @examples 
 #' # Combine the count data between male and female populations in Palo Alto
 #' combine(count_female_population(PALO_ALTO_CITY_CA), count_male_population(PALO_ALTO_CITY_CA))
 combine <- function(d1, d2, group_cols=c("geoName","provenanceDomain"), FUN=sum) {

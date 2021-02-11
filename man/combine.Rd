@@ -29,3 +29,7 @@ The data are then grouped based on the group_cols and then aggregated using
 the function FUN parameters. The result is a new combined commondata data
 table.
 }
+\examples{
+# Combine the count data between male and female populations in Palo Alto
+combine(count_female_population(PALO_ALTO_CITY_CA), count_male_population(PALO_ALTO_CITY_CA))
+}
