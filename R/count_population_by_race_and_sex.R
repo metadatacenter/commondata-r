@@ -45,7 +45,7 @@ count_population_by_race_and_sex <- function(geo_names,
   for (race_group in CENSUS_RACE_GROUPS) {
     for (sex_category in CENSUS_SEX_CATEGORIES) {
       statvar_map[[race_group]][[sex_category]] <- 
-        sapply(CENSUS_PERSON_AGE_GROUPS,
+        sapply(CENSUS_PERSON_WITH_RACE_AGE_GROUPS,
                function(x) paste0("Count_Person_", x, "_", sex_category, "_", race_group),
                simplify = FALSE, USE.NAMES = TRUE)
     }

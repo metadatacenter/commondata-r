@@ -52,6 +52,23 @@
     "85OrMoreYears"
   )
   
+  CENSUS_PERSON_WITH_RACE_AGE_GROUPS <<- c(
+    "Upto5Years",
+    "5To9Years",
+    "10To14Years",
+    "15To17Years",
+    "18To19Years",
+    "20To24Years",
+    "25To29Years",
+    "30To34Years",
+    "35To44Years",
+    "45To54Years",
+    "55To64Years",
+    "65To74Years",
+    "75To84Years",
+    "85OrMoreYears"
+  )
+  
   CENSUS_PERSON_WITH_INCOME_AGE_GROUPS <<- c(
     "15OrMoreYears",
     "16OrMoreYears",
