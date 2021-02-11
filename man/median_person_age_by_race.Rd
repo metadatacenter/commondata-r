@@ -4,11 +4,11 @@
 \alias{median_person_age_by_race}
 \title{Return the median age of the population of different race groups for the
 given the geographical names (i.e., zip codes, state codes, state names,
-county names) and the observation year period.}
+county names, or school district) and the observation year period.}
 \usage{
 median_person_age_by_race(
   geo_names,
-  location_type = c(NA, "zip", "county", "state"),
+  location_type = c(NA, "zip", "county", "state", "school"),
   start_year = 2011,
   end_year = 2018,
   year = NA
@@ -38,7 +38,7 @@ the observation year and race group.
 \description{
 Return the median age of the population of different race groups for the
 given the geographical names (i.e., zip codes, state codes, state names,
-county names) and the observation year period.
+county names, or school district) and the observation year period.
 }
 \examples{
 zips <- c("94035","94039","94040","94041","94042","94043")

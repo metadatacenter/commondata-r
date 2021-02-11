@@ -1,6 +1,6 @@
 #' Return the median age of the population of different race groups for the 
 #' given the geographical names (i.e., zip codes, state codes, state names, 
-#' county names) and the observation year period.
+#' county names, or school district) and the observation year period.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names.
 #' @param location_type optional, string indicating the location type of the
@@ -34,8 +34,8 @@
 #' count_household_income_by_race(c("CA")) # State code
 #' count_household_income_by_race(c("06")) # 2-digit state FIPS code
 median_person_age_by_race <- function(geo_names,
-                                      location_type=c(NA, "zip", "county", "state"),
-                                      start_year=2011, end_year=2018, year=NA) {
+                                location_type=c(NA, "zip", "county", "state", "school"),
+                                start_year=2011, end_year=2018, year=NA) {
   
   location_type <- match.arg(location_type)
   geo_map <- .create_geo_dcid_map(geo_names, location_type)
