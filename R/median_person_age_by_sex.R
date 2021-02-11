@@ -21,19 +21,19 @@
 #' zips <- c("94035","94039","94040","94041","94042","94043")
 #' 
 #' # Get the median age in the specified ZIP codes
-#' median_person_age(zips)
+#' median_person_age_by_sex(zips)
 #' 
 #' # Get the median age from 2012 to 2015
-#' median_person_age(zips, start_year=2012, end_year=2015)
+#' median_person_age_by_sex(zips, start_year=2012, end_year=2015)
 #' 
 #' # Get the median age in 2012
-#' median_person_age(zips, year=2012)
+#' median_person_age_by_sex(zips, year=2012)
 #' 
 #' # Get the median age in California state
-#' median_person_age(c("California")) # State name
-#' median_person_age(c("CA")) # State code
-#' median_person_age(c("06")) # 2-digit state FIPS code
-median_person_age <- function(geo_names,
+#' median_person_age_by_sex(c("California")) # State name
+#' median_person_age_by_sex(c("CA")) # State code
+#' median_person_age_by_sex(c("06")) # 2-digit state FIPS code
+median_person_age_by_sex <- function(geo_names,
                               location_type=c(NA, "zip", "county", "state", "school"),
                               start_year=2011, end_year=2018, year=NA) {
   

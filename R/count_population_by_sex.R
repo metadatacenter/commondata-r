@@ -21,19 +21,19 @@
 #' zips <- c("94035","94039","94040","94041","94042","94043")
 #' 
 #' # Count the population in the specified ZIP codes
-#' count_population(zips)
+#' count_population_by_sex(zips)
 #' 
 #' # Count the population from 2012 to 2015
-#' count_population(zips, start_year=2012, end_year=2015)
+#' count_population_by_sex(zips, start_year=2012, end_year=2015)
 #' 
 #' # Count the population in 2012
-#' count_population(zips, year=2012)
+#' count_population_by_sex(zips, year=2012)
 #' 
 #' # Count the population in the state of California
-#' count_population(c("California")) # State name
-#' count_population(c("CA")) # State code
-#' count_population(c("06")) # 2-digit state FIPS code
-count_population <- function(geo_names,
+#' count_population_by_sex(c("California")) # State name
+#' count_population_by_sex(c("CA")) # State code
+#' count_population_by_sex(c("06")) # 2-digit state FIPS code
+count_population_by_sex <- function(geo_names,
                                   location_type=c(NA, "zip", "county", "state", "school"),
                                   start_year=2011, end_year=2018, year=NA) {
   
