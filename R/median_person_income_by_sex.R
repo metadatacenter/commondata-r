@@ -44,11 +44,7 @@ median_person_income_by_sex <- function(geo_names,
   for (sex_category in CENSUS_SEX_CATEGORIES) {
     statvar_map[[sex_category]] <- 
       sapply(CENSUS_PERSON_WITH_INCOME_AGE_GROUPS, 
-             function(x) {
-               if (x == "15OrMoreYears")
-                 paste0("Median_Income_Person") else
-                 paste0("Median_Income_Person_", x)
-             }, 
+             function(x) paste0("Median_Income_Person_", x, "_", sex_category, "_WithIncome"), 
              simplify = FALSE, USE.NAMES = TRUE)
   }
   
