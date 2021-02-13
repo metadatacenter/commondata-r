@@ -21,8 +21,8 @@
 #' statvars <- c("Count_Person", "Median_Age_Person")
 #' latest_statistical_data(states, level="state", statvars)
 latest_statistical_data <- function(geo_names,
-                                    location_type=c(NA, "zip", "county", "state"),
-                                    statvars, verbose=TRUE) {
+                              location_type=c(NA, "zip", "county", "state", "school"),
+                              statvars, verbose=TRUE) {
   
   location_type <- match.arg(location_type)
   geo_map <- .create_geo_dcid_map(geo_names, location_type)
