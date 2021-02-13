@@ -2,8 +2,10 @@
 
 export(count_household_income_by_age)
 export(count_household_income_by_race)
-export(count_population_by_race_and_sex)
-export(count_population_by_sex)
+export(count_person_by_college_enrollment_and_sex)
+export(count_person_by_race_and_sex)
+export(count_person_by_school_enrollment_and_sex)
+export(count_person_by_sex)
 export(cumulative_count_covid19_incident)
 export(latest_statistical_data)
 export(median_person_age_by_race)

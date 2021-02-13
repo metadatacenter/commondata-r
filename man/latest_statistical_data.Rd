@@ -7,7 +7,7 @@ the list of the statistical variables.}
 \usage{
 latest_statistical_data(
   geo_names,
-  location_type = c(NA, "zip", "county", "state"),
+  location_type = c(NA, "zip", "county", "state", "school"),
   statvars,
   verbose = TRUE
 )
