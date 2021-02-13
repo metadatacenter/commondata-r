@@ -69,6 +69,24 @@
     "85OrMoreYears"
   )
   
+  CENSUS_PERSON_WITH_SCHOOL_EDUCATION_AGE_GROUPS <<- c(
+    "3To4Years",
+    "5To9Years",
+    "10To14Years",
+    "15To17Years",
+    "18To19Years",
+    "20To24Years",
+    "25To34Years",
+    "35OrMoreYears"
+  )
+  
+  CENSUS_PERSON_WITH_COLLEGE_EDUCATION_AGE_GROUPS <<- c(
+    "15To17Years",
+    "18To24Years",
+    "25To34Years",
+    "35OrMoreYears"
+  )
+  
   CENSUS_PERSON_WITH_INCOME_AGE_GROUPS <<- c(
     "15OrMoreYears",
     "16OrMoreYears",
@@ -80,6 +98,16 @@
     "25To44Years",
     "45To64Years",
     "65OrMoreYears"
+  )
+  
+  CENSUS_SCHOOL_ENROLLMENT_GROUPS <<- c(
+    "PrivateSchool",
+    "PublicSchool"
+  )
+  
+  CENSUS_COLLEGE_ENROLLMENT_GROUPS <<- c(
+    "PrivateCollegeOrGraduateSchool",
+    "PublicCollegeOrGraduateSchool"
   )
   
   CENSUS_RACE_GROUPS <<- c(
