@@ -53,8 +53,6 @@
     return ("state")
   } else if (geo_name %in% US_STATES) {
     return ("state")
-  } else if (grepl(",", geo_name)) {
-    return ("county")
   } else {
     stop("Unable to determine the location type automatically. Consider to specifying it using the 'location_type' argument")
   }
