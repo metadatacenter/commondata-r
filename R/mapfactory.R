@@ -47,6 +47,8 @@
 .determine_location_type <- function(geo_name) {
   if (grepl("\\d{5}", geo_name)) {
     return ("zip")
+  } else if (grepl("\\d{7}", geo_name)) {
+    return ("city")
   } else if (grepl("[A-Z]{2}", geo_name)) {
     return ("state")
   } else if (grepl("\\d{2}", geo_name)) {
