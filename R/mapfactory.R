@@ -25,11 +25,11 @@
   return (state_map)
 }
 
-.create_school_district_dcid_map <- function(zips) {
-  zip_map <- sapply(zips, 
+.create_school_district_dcid_map <- function(school_districts) {
+  school_district_map <- sapply(school_districts, 
                     function(x) paste0("geoId/sch", x), 
                     simplify = FALSE, USE.NAMES = TRUE)
-  return (zip_map)
+  return (school_district_map)
 }
 
 .create_geo_dcid_map <- function(geo_names, location_type=NA) {
