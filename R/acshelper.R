@@ -16,7 +16,7 @@
   if (nrow(result) == 1) {
     return (paste0(state_fips, .get_fips(as.list(result), "county", 3)))
   } else {
-    best_match = .get_best_match(result, "county.name", paste0(county_name, " County"))
+    best_match = .get_best_match(result, "county.name", county_name)
     return (paste0(state_fips, .get_fips(as.list(best_match), "county", 3)))
   }
 }
@@ -29,7 +29,7 @@
   if (nrow(result) == 1) {
     return (paste0(state_fips, .get_fips(as.list(result), "place", 5)))
   } else {
-    best_match = .get_best_match(result, "place.name", paste0(city_name, " city"))
+    best_match = .get_best_match(result, "place.name", city_name)
     return (paste0(state_fips, .get_fips(as.list(best_match), "place", 5)))
   }
 }
@@ -59,7 +59,7 @@
     if (is.na(found_string)) {
       next
     } else {
-      if (found_string == match_string) {
+      if (startsWith(found_string, match_string)) {
         return (list)
       }
     }
