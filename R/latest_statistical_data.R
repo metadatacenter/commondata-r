@@ -10,7 +10,7 @@
 #' @param verbose optional, boolean whether the time information should be
 #'    included in the output. True by default.
 #' @return  A data frame containing the values of each statistical variable
-#'    per zip code.
+#'    per geographical name.
 #'     
 #' @export
 #' @examples
@@ -56,9 +56,9 @@ latest_statistical_data <- function(geo_names,
 
 .get_latest_observation_table <- function(obj, geo_map, statvar_map) {
   
-  output <- data.frame(zipCode=names(geo_map))
+  output <- data.frame(geoName=names(geo_map))
   for (observation in names(statvar_map)) {
-    obs_df <- data.frame(zipCode=names(geo_map))
+    obs_df <- data.frame(geoName=names(geo_map))
     statvar_values <- c()
     statvar_temporal <- c()
     for (geo_name in names(geo_map)) {
@@ -76,7 +76,7 @@ latest_statistical_data <- function(geo_names,
     }
     obs_df[, observation] <- statvar_values
     obs_df[, paste0(observation, "_Date")] <- statvar_temporal
-    output <- merge(x=output, y=obs_df, by="zipCode", all.x=TRUE)
+    output <- merge(x=output, y=obs_df, by="geoName", all.x=TRUE)
   }
   return (output)
 }
