@@ -25,6 +25,17 @@
   return (county_map)
 }
 
+.create_city_dcid_map <- function(cities) {
+  city_map <- sapply(cities,
+                       function(x) {
+                         city <- trimws(gsub("^(.*?),.*", "\\1", x))
+                         state <- trimws(gsub("^.*,(.*)", "\\1", x))
+                         fips <- .get_city_fips(city, state)
+                         paste0("geoId/", if(is.na(fips)) x else fips)},
+                       simplify = FALSE, USE.NAMES = TRUE)
+  return (city_map)
+}
+
 .create_school_district_dcid_map <- function(school_districts) {
   school_district_map <- sapply(school_districts, 
                     function(x) paste0("geoId/sch", x), 

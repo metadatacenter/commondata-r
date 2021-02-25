@@ -26,7 +26,7 @@
     return (paste0(state_fips, .get_fips(as.list(result), "place", 5)))
   } else {
     best_match = .get_best_match(result, "place.name", paste0(city_name, " city"))
-    return (.get_fips(as.list(best_match), "place", 5))
+    return (paste0(state_fips, .get_fips(as.list(best_match), "place", 5)))
   }
 }
 
