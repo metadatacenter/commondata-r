@@ -8,7 +8,7 @@
 .create_state_dcid_map <- function(states) {
   state_map <- sapply(states,
                       function(x) {
-                        fips <- usmap::fips(x)
+                        fips <- .get_state_fips(x)
                         paste0("geoId/", if(is.na(fips)) x else fips)},
                       simplify = FALSE, USE.NAMES = TRUE)
   return (state_map)
@@ -19,10 +19,10 @@
                       function(x) {
                         county <- trimws(gsub("^(.*?),.*", "\\1", x))
                         state <- trimws(gsub("^.*,(.*)", "\\1", x))
-                        fips <- usmap::fips(county = county, state = state)
+                        fips <- .get_county_fips(county, state)
                         paste0("geoId/", if(is.na(fips)) x else fips)},
                       simplify = FALSE, USE.NAMES = TRUE)
-  return (state_map)
+  return (county_map)
 }
 
 .create_school_district_dcid_map <- function(school_districts) {
