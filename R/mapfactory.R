@@ -48,6 +48,7 @@
   }
   switch(location_type,
          zip = .create_zip_dcid_map(geo_names),
+         city = .create_city_dcid_map(geo_names),
          state = .create_state_dcid_map(geo_names),
          county = .create_county_dcid_map(geo_names),
          school = .create_school_district_dcid_map(geo_names))

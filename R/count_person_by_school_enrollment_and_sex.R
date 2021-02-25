@@ -1,11 +1,12 @@
 #' Return the person count per age group for the given the geographical names
-#' (i.e., zip codes, state codes, state names, county names, or school district)
-#' and the observation year period. The count is sub-divided by the school
-#' enrollment group and sex category.
+#' (i.e., zip codes, state codes, state names, county names, city names or
+#' school district) and the observation year period. The count is sub-divided
+#' by the school enrollment group and sex category.
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
 #' @param location_type optional, string indicating the location type of the
-#'    geographical names. NA by default.
+#'    geographical names. If the location_type is blank then the function will
+#'    try to guess the location type based on the input geo_names. NA by default.
 #' @param start_year optional, integer indicating the start year of observation.
 #'    2011 by default.
 #' @param end_year optional, integer indicating the end year of observation.
@@ -35,7 +36,7 @@
 #' count_person_by_school_enrollment_and_sex(c("CA")) # State code
 #' count_person_by_school_enrollment_and_sex(c("06")) # 2-digit state FIPS code
 count_person_by_school_enrollment_and_sex <- function(geo_names,
-                                                location_type=c(NA, "zip", "county", "state", "school"),
+                                                location_type=c(NA, "zip", "city", "county", "state", "school"),
                                                 start_year=2011, end_year=2018, year=NA) {
   
   location_type <- match.arg(location_type)

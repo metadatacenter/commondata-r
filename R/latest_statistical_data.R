@@ -3,7 +3,8 @@
 #' 
 #' @param geo_names required, vector of string(s) of geographical names
 #' @param location_type optional, string indicating the location type of the
-#'    geographical names. NA by default.
+#'    geographical names. If the location_type is blank then the function will
+#'    try to guess the location type based on the input geo_names. NA by default.
 #' @param statvars required, vector of statistical variables. The variable list
 #'    can be found at https://docs.datacommons.org/statistical_variables.html
 #' @param verbose optional, boolean whether the time information should be
@@ -21,7 +22,7 @@
 #' statvars <- c("Count_Person", "Median_Age_Person")
 #' latest_statistical_data(states, level="state", statvars)
 latest_statistical_data <- function(geo_names,
-                              location_type=c(NA, "zip", "county", "state", "school"),
+                              location_type=c(NA, "zip", "city", "county", "state", "school"),
                               statvars, verbose=TRUE) {
   
   location_type <- match.arg(location_type)
