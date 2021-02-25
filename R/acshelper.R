@@ -34,6 +34,19 @@
   }
 }
 
+.get_school_district_fips <- function(school_district_with_state_name) {
+  school_district_name <- trimws(gsub("^(.*?),.*", "\\1", school_district_with_state_name))
+  state_name <- trimws(gsub("^.*,(.*)", "\\1", school_district_with_state_name))
+  result <- acs::geo.lookup(state=state_name, school.district=school_district_name)
+  state_fips = .get_state_fips(state_name)
+  if (nrow(result) == 1) {
+    return (paste0(state_fips, .get_fips(as.list(result), "school.district", 5)))
+  } else {
+    best_match = .get_best_match(result, "school.district.name", school_district_name)
+    return (paste0(state_fips, .get_fips(as.list(best_match), "school.district", 5)))
+  }
+}
+
 .get_fips <- function(list, variable, fips_digit) {
   fips = list[[variable]]
   return (str_pad(fips, fips_digit, pad="0"))

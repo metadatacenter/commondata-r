@@ -34,7 +34,9 @@
 
 .create_school_district_dcid_map <- function(school_districts) {
   school_district_map <- sapply(school_districts, 
-                    function(x) paste0("geoId/sch", x), 
+                    function(x) paste0("geoId/sch", 
+                                       if (.is_school_district_fips(x)) x
+                                       else .get_school_district_fips(x)), 
                     simplify = FALSE, USE.NAMES = TRUE)
   return (school_district_map)
 }
@@ -85,4 +87,8 @@
 
 .is_state_abbrv <- function(s) {
   return (grepl("[A-Z]{2}", s))
+}
+
+.is_school_district_fips <- function(s) {
+  return (grepl("\\d{7}", s))
 }
