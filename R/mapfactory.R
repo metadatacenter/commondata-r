@@ -16,28 +16,18 @@
 
 .create_county_dcid_map <- function(counties) {
   county_map <- sapply(counties,
-                      function(x) {
-                        fips <- x
-                        if (!.is_county_fips(x)) {
-                          county <- trimws(gsub("^(.*?),.*", "\\1", x))
-                          state <- trimws(gsub("^.*,(.*)", "\\1", x))
-                          fips <- .get_county_fips(county, state)
-                        }
-                        paste0("geoId/", fips)},
+                      function(x) paste0("geoId/",
+                                         if (.is_county_fips(x)) x
+                                         else .get_county_fips(x)),
                       simplify = FALSE, USE.NAMES = TRUE)
   return (county_map)
 }
 
 .create_city_dcid_map <- function(cities) {
   city_map <- sapply(cities,
-                       function(x) {
-                         fips <- x
-                         if (!.is_city_fips(x)) {
-                           city <- trimws(gsub("^(.*?),.*", "\\1", x))
-                           state <- trimws(gsub("^.*,(.*)", "\\1", x))
-                           fips <- .get_city_fips(city, state)
-                         }
-                         paste0("geoId/", fips)},
+                     function(x) paste0("geoId/",
+                                        if (.is_city_fips(x)) x
+                                        else .get_city_fips(x)),
                        simplify = FALSE, USE.NAMES = TRUE)
   return (city_map)
 }

@@ -8,7 +8,9 @@
   }
 }
 
-.get_county_fips <- function(county_name, state_name) {
+.get_county_fips <- function(county_with_state_name) {
+  county_name <- trimws(gsub("^(.*?),.*", "\\1", county_with_state_name))
+  state_name <- trimws(gsub("^.*,(.*)", "\\1", county_with_state_name))
   result <- acs::geo.lookup(state=state_name, county=county_name)
   state_fips = .get_state_fips(state_name)
   if (nrow(result) == 1) {
@@ -19,7 +21,9 @@
   }
 }
 
-.get_city_fips <- function(city_name, state_name) {
+.get_city_fips <- function(city_with_state_name) {
+  city_name <- trimws(gsub("^(.*?),.*", "\\1", city_with_state_name))
+  state_name <- trimws(gsub("^.*,(.*)", "\\1", city_with_state_name))
   result <- acs::geo.lookup(state=state_name, place=city_name)
   state_fips = .get_state_fips(state_name)
   if (nrow(result) == 1) {
