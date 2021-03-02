@@ -7,8 +7,10 @@
 #'    try to guess the location type based on the input geo_names. NA by default.
 #' @param statvars required, vector of statistical variables. The variable list
 #'    can be found at https://docs.datacommons.org/statistical_variables.html
-#' @param verbose optional, boolean whether the time information should be
-#'    included in the output. True by default.
+#' @param includeDate optional, boolean whether the time information should be
+#'    included in the output. False by default.
+#' @param includeProvenance optional, boolean whether the provenance information
+#'    should be included in the output. False by default.
 #' @return  A data frame containing the values of each statistical variable
 #'    per geographical name.
 #'     
@@ -23,7 +25,7 @@
 #' latest_statistical_data(states, level="state", statvars)
 latest_statistical_data <- function(geo_names,
                               location_type=c(NA, "zip", "city", "county", "state", "school"),
-                              statvars, verbose=TRUE) {
+                              statvars, includeDates=FALSE, includeProvenance=FALSE) {
   
   location_type <- match.arg(location_type)
   geo_map <- .create_geo_dcid_map(geo_names, location_type)
@@ -34,8 +36,11 @@ latest_statistical_data <- function(geo_names,
   
   df <- .get_latest_statistical_data(geo_map, statvar_map)
   
-  if (!verbose) {
+  if (!includeDates) {
     df <- df[, -grep("_Date", colnames(df))]
+  }
+  if (!includeProvenance) {
+    df <- df[, -grep("_Provenance", colnames(df))]
   }
   
   return(df)
@@ -61,21 +66,25 @@ latest_statistical_data <- function(geo_names,
     obs_df <- data.frame(geoName=names(geo_map))
     statvar_values <- c()
     statvar_temporal <- c()
+    statvar_provenance <- c()
     for (geo_name in names(geo_map)) {
       geo_dcid <- geo_map[[geo_name]]
       statvar_dcid <- statvar_map[[observation]]
       
       statvar_data <- .get_statvar_data(obj, statvar_dcid)
-      place_data <- .get_place_data(statvar_data, geo_dcid)
+      place_data <<- .get_place_data(statvar_data, geo_dcid)
       
       value <- .get_statvar_value(place_data)
       temporal <- .get_statvar_date(place_data)
+      provenance <- .get_statvar_provenance_import_name(place_data)
       
       statvar_values <- c(statvar_values, value)
       statvar_temporal <- c(statvar_temporal, temporal)
+      statvar_provenance <- c(statvar_provenance, provenance)
     }
     obs_df[, observation] <- statvar_values
     obs_df[, paste0(observation, "_Date")] <- statvar_temporal
+    obs_df[, paste0(observation, "_Provenance")] <- statvar_provenance
     output <- merge(x=output, y=obs_df, by="geoName", all.x=TRUE)
   }
   return (output)

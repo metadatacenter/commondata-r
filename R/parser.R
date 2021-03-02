@@ -60,6 +60,10 @@
   return(.get_provenance_info(obj, PROVENANCE_URL))
 }
 
+.get_statvar_provenance_import_name <- function(obj) {
+  return(.get_provenance_info(obj, IMPORT_NAME))
+}
+
 .get_provenance_info <- function(obj, provenance_name) {
   obj_names <- names(obj)
   if (SOURCE_SERIES %in% obj_names) {
