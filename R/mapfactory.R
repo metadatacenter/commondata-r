@@ -41,6 +41,13 @@
   return (school_district_map)
 }
 
+.create_census_tract_dcid_map <- function(census_tracts) {
+  census_tract_map <- sapply(census_tracts, 
+                             function(x) paste0("geoId/", x), 
+                             simplify = FALSE, USE.NAMES = TRUE)
+  return (census_tract_map)
+}
+
 .create_geo_dcid_map <- function(geo_names, location_type=NA) {
   if (is.na(location_type)) {
     sample_name = geo_names[1]
@@ -51,7 +58,8 @@
          city = .create_city_dcid_map(geo_names),
          state = .create_state_dcid_map(geo_names),
          county = .create_county_dcid_map(geo_names),
-         school = .create_school_district_dcid_map(geo_names))
+         school = .create_school_district_dcid_map(geo_names),
+         censusTract = .create_census_tract_dcid_map(geo_names))
 }
 
 .determine_location_type <- function(geo_name) {
@@ -63,6 +71,8 @@
     return ("state")
   } else if (.is_state_fips(geo_name)) {
     return ("state")
+  } else if (.is_census_tract_fips(geo_name)) {
+    return ("censusTract")
   } else if (geo_name %in% US_STATES) {
     return ("state")
   } else {
@@ -92,4 +102,8 @@
 
 .is_school_district_fips <- function(s) {
   return (grepl("\\d{7}", s))
+}
+
+.is_census_tract_fips <- function(s) {
+  return (grepl("\\d{11}", s))
 }

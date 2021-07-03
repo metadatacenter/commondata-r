@@ -24,7 +24,7 @@
 #' statvars <- c("Count_Person", "Median_Age_Person")
 #' latest_statistical_data(states, level="state", statvars)
 latest_statistical_data <- function(geo_names,
-                              location_type=c(NA, "zip", "city", "county", "state", "school"),
+                              location_type=c(NA, "zip", "city", "county", "state", "school", "censusTract"),
                               statvars, includeDates=FALSE, includeProvenance=FALSE) {
   
   location_type <- match.arg(location_type)
